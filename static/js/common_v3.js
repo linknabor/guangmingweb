@@ -1,32 +1,23 @@
 var MasterConfig = function() {
     var t = {
                 
-        baseUrl: "http://www.e-shequ.com/wechat/hexie/wechat/",
-        basePageUrl:"http://www.e-shequ.com/weixin/",
-        appId: "wx89c743b2fa762a2c",
-        
-        //baseUrl: "http://www.e-shequ.com/wechat-sit/hexie/wechat/",
-        //basePageUrl:"http://www.e-shequ.com/wechat-sit/hexie/",
-
-        //baseUrl: "http://test.e-shequ.com/wechat/hexie/wechat/",
-        //basePageUrl:"http://test.e-shequ.com/weixin/",
-        //appId: "wx95f46f41ca5e570e",
+        baseUrl: "http://guangming.chinacloudapp.cn/guangming/wechat/hexie/wechat/",
+        basePageUrl:"http://guangming.chinacloudapp.cn/guangming/weixin/",
+        appId: "wx5b1a7c252c3cbc26",
         
         oauthUrl: "https://open.weixin.qq.com/connect/oauth2/authorize?",
         oauthUrlPostFix:"&response_type=code&scope=snsapi_userinfo&state=123#wechat_redirect",
-        bindAppId: "wxa48ca61b68163483",
+		oauthUrlPostSilent:"&response_type=code&scope=snsapi_base&state=123#wechat_redirect",
+        bindAppId: "wx89c743b2fa762a2c",
         
 		payPageFolder:"http://www.e-shequ.com/pay/",
-        payPageSuffix:"hx",		//hexie
+        payPageSuffix:"gm",		//hexie
 
         baidu_map_key:"RUWUgrEEF5VjoaWsstMMZwOD",
-        shop_name: "合协",
+        shop_name: "悦生活",
         
         is_debug:true,
-        statistics: {
-            baidu_code: "bca1d4564e31c6c46201a8ede08d0fff",
-            cnzz_script: '<script src="http://s11.cnzz.com/stat.php?id=1256090623&web_id=1256090623" language="JavaScript"></script>'
-        }
+       
     },
     
     e = {};
@@ -46,7 +37,7 @@ var Config = function() {
             no_goods: "更多新品正在陆续推出..."
         },
         user_info: {
-            avatar: "http://www.e-shequ.com/weixin/static/images/logo.jpg",
+            avatar: "http://guangming.chinacloudapp.cn/guangming/weixin/static/images/logo.jpg",
             nickname: "游客",
             levelname: "普通会员"
         },
@@ -56,7 +47,7 @@ var Config = function() {
             2 : "大楼VIP"
         },
         coupon:{
-            seedImg:"http://www.e-shequ.com/weixin/static/img/banner/banner_market_shuiguo.jpg"
+            seedImg:"http://guangming.chinacloudapp.cn/guangming/weixin/static/img/banner/banner_market_shuiguo.jpg"
         }
     },
     e = {};
@@ -281,19 +272,7 @@ function toRegisterAndBack(){
 	var n = location.origin + common.removeParamFromUrl(["from", "bind", "code", "share_id", "isappinstalled", "state", "m", "c", "a"]);
 	location.href=MasterConfig.C('basePageUrl')+"person/register.html?comeFrom="+encodeURIComponent(n);
 }
-/*增加访问统计*/
-var _hmt = _hmt || []; !
 
-function() {
-    var e = document.createElement("script");
-    e.src = "//hm.baidu.com/hm.js?" + MasterConfig.C("statistics").baidu_code;
-    var o = document.getElementsByTagName("script")[0];
-    o.parentNode.insertBefore(e, o)
-} (),
-/**
-function() {
-    document.write(MasterConfig.C("statistics").cnzz_script)
-} (),**/
 AJAXFlag = !0;
 var common = {
     isDebug: !1,
@@ -454,4 +433,4 @@ var commonui = {
 
 checkBindAndBind();
 checkCodeAndLogin();
-common.setTitle(MasterConfig.C("shop_name") + "社区");
+common.setTitle(MasterConfig.C("shop_name"));
