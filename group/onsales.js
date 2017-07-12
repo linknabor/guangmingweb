@@ -66,9 +66,7 @@ avalon.ready(function() {
         }
     });
 
-    if(checkCodeAndLogin()){
-		getCurrentType();
-    }
+	getCurrentType();
 	getBannerType();
 	initSwiper();
     avalon.scan(document.body);

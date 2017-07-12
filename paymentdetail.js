@@ -68,7 +68,6 @@ function calcReduceAmt(){
 }
 
 avalon.ready(function() {
-	
 	function getBillId(){
 		o.billId=getUrlParam("billIds");
 		o.stmtId=getUrlParam("stmtId");
@@ -103,15 +102,15 @@ avalon.ready(function() {
         	o.userPayType = n.result.user_pay_type;
         	o.tradeWaterId = n.result.trade_water_id;
         	o.packageId = n.result.packageId;
-
-			wx.config({
+        	
+        	wx.config({
     		    appId: n.result.appid, // 必填，公众号的唯一标识
     		    timestamp: n.result.timestamp , // 必填，生成签名的时间戳
     		    nonceStr: n.result.noncestr, // 必填，生成签名的随机串
     		    signature: n.result.paysign,// 必填，签名，见附录1
     		    jsApiList: ['chooseWXPay'] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
     		});
-
+        	
             wx.chooseWXPay({
                 "timestamp":n.result.timestamp,
                 "nonceStr":n.result.noncestr,
@@ -123,10 +122,10 @@ avalon.ready(function() {
                 	notifyPaySuccess();
           	    },
           	    fail:function(res) {
-          	    	alert(JSON.stringify(res));
-			        	o.isPaying = false;
-			        	commonui.hideAjaxLoading();
-			        	$("#zzmb").hide();
+      	    		alert(JSON.stringify(res));
+		        	o.isPaying = false;
+		        	commonui.hideAjaxLoading();
+		        	$("#zzmb").hide();
           	    },
           	    cancel:function(res){
 					console.log(JSON.stringify(n));

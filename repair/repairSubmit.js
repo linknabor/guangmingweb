@@ -10,12 +10,6 @@ function queryProject(){
     	alert("获取项目信息失败");
     });
 }
-function chooseAddress(address){
-	if(address){
-		o.address=address;
-	}
-	o.currentPage='main';
-}
 var uploadImgMap = {};
 avalon.ready(function() {
 	initWechat(['chooseImage','previewImage','uploadImage','downloadImage']);
@@ -35,8 +29,13 @@ avalon.ready(function() {
         memo: "",
         projectId:0,
         showAddress:function(){
-        	o.currentPage='addresses';
-        	initAddressList();
+        	o.currentPage='';
+        	chooseAddress(function(address){
+                if(address){
+                    o.address=address;
+                }
+                o.currentPage='main';
+            });
         },
         
         addPic:function(){

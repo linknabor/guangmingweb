@@ -11,7 +11,7 @@
 		<script src="../../static/js/jquery.js"></script>
 		<script src="../../static/js/avalon.js"></script>
 		<script src="../../static/js/common_v3.js"></script>
-		<script src="index.js"></script>
+		<script src="index.js?v=8"></script>
 		<style type="text/css">
 		[ms-controller]:{display: none;}
 			body{
@@ -90,7 +90,7 @@
 		<div class="device" ms-visible="currentPage=='list'">
 		    <div class="swiper-container">
 		        <div class="swiper-wrapper">
-		           <div class="swiper-slide"  ms-repeat-banner="banners">
+		           <div class="swiper-slide"  ms-repeat-banner="banners"> 
 			           <a ms-href="{{banner.bannerUrl}}">
 						    <img ms-src="{{banner.picture}}">
 			           </a>
@@ -126,7 +126,6 @@
 			<ul class="foot_bar">
 				<!--<li><a href="#" ms-click="chosecity"><span id="city">{{maincity.name}}</span><img class="arrow" src="../../static/images/home/wash/wash_index_arrow.png" alt="" /></a></li>-->
 				<li><a href="../index.html"><span style="font-size:16px">首页</span></a></li>
-				<li><a href="introduce.html"><img src="../../static/images/home/wash/wash_index_serve.png"/><span>服务介绍</span></a></li>
 				<li><a href="../../xiyi_list.html"><img src="../../static/images/home/wash/wash_index_order.png"/><span>订单</span></a></li>
 			</ul>
 		</div>
@@ -141,7 +140,7 @@ function initSwiper(){
         $('.swiper-container').css({height:a3 + 'px'});
         $('.swiper-slide img').css({height:a3 + 'px'});
 		$('.hideloadingpage').hide();
-
+		
 		//顶部图片滑动代码↓
 	    var mySwiper = new Swiper('.swiper-container',{
 	        speed:750,

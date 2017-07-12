@@ -62,9 +62,7 @@ avalon.ready(function() {
         	query();
         }
     });
-    if(checkCodeAndLogin()){
-		getCurrentType();
-    }
+	getCurrentType();
 	getBannerType();
     avalon.scan(document.body);
     common.setTitle("社区集市");

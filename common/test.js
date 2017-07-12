@@ -1,10 +1,4 @@
 var o;
-function chooseAddress(address){
-	if(address){
-		o.checkedAddress=address;
-	}
-	o.currentPage='main';
-}
 function chooseCoupon(coupon) {
 	if(coupon == null) {
 		o.coupon=null;
@@ -41,7 +35,12 @@ avalon.ready(function() {
     	couponDesc:'未使用',
         showAddress:function(){
         	o.currentPage='addresses';
-        	initAddressList();
+        	chooseAddress(function(address){
+                if(address){
+                    o.checkedAddress=address;
+                }
+                o.currentPage='main';
+            });
         },
         showCoupons:function(){
         	o.currentPage='coupons';

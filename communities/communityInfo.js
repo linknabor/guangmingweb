@@ -31,7 +31,7 @@ avalon.ready(function() {
 	var o = avalon.define({
 		$id : "root",
 		infos : [],
-		bg_img: '../static/images/community/bg_publish.jpg',
+		bg_img: '../static/img/bg/bg_publish.jpg',
 		info_count:0,
 		
 	});

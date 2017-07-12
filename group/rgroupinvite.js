@@ -43,7 +43,7 @@ avalon.ready(function() {
 		var title = rule.name;
 		var link=MasterConfig.C('basePageUrl')+"group/rgroupinvite.html?ruleId="+o.ruleId;
 		var img=product.smallPicture;
-		var desc="我在光明悦生活参与了一个"+rule.name+"的团购，大家一起来参与吧";
+		var desc="我在悦生活参与了一个"+rule.name+"的团购，大家一起来参与吧";
 		initShareConfig(title,link,img,desc);
 	}
     function product(productId) {
@@ -121,6 +121,5 @@ avalon.ready(function() {
         checkFromShare(4,o.ruleId);
     }
     initWechat(['onMenuShareTimeline','onMenuShareAppMessage']);
-    checkCodeAndLogin();
     FastClick.attach(document.body);
 });

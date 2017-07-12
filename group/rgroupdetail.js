@@ -49,7 +49,7 @@ avalon.ready(function() {
 			console.log(JSON.stringify(n));
 			o.product = n.result;
 		    setTimeout(initSwipe,1000);
-			initShareConfig(o.rule.name,MasterConfig.C("basePageUrl")+"group/rgroupdetail.html?ruleId="+o.ruleId,o.product.smallPicture,"快来参加光明悦生活的优惠商品抢购吧");
+			initShareConfig(o.rule.name,MasterConfig.C("basePageUrl")+"group/rgroupdetail.html?ruleId="+o.ruleId,o.product.smallPicture,"快来参加悦生活的优惠商品抢购吧");
         },
         r = function(n) {
 			console.log("error");
@@ -96,7 +96,10 @@ avalon.ready(function() {
         buy:function(){
 
         	if(common.checkRegisterStatus()&&o.rule.id){
-        		location.href="../buy.html?type=4&ruleId="+o.rule.id;
+        		var url = MasterConfig.C("payPageFolder")+MasterConfig.C("payPageSuffix");
+                url += "buy.html?type=4&ruleId="+o.rule.id;
+                url += "&basePageUrl="+escape(MasterConfig.C("basePageUrl"));
+    			location.href = url;
         	}
         },
         golist:function(){
@@ -114,6 +117,5 @@ avalon.ready(function() {
         checkFromShare(4,o.ruleId);
     }
     initWechat(['onMenuShareTimeline','onMenuShareAppMessage']);    
-    checkCodeAndLogin();
     FastClick.attach(document.body);
 });

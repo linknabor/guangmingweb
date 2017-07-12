@@ -117,7 +117,7 @@ avalon.ready(function() {
 	var o = avalon.define({
 		$id : "root",
 		annoucements : [],
-		bg_img: '../static/images/community/bg_publish.jpg',
+		bg_img: '../static/img/bg/bg_publish.jpg',
 		annoucement_count:0,
 		
 		gotoDetail:function(annoucementId){

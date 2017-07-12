@@ -5,16 +5,16 @@ $(document).ready(function(){
 	$("._baocun").on("click",saveCarInfo);
 });
 function getCarBrandlist() {
-	var n = "GET", 
-		a = "carBrandlist", 
-		i = null, 
+	var n = "GET",
+		a = "carBrandlist",
+		i = null,
 		e = function(data) {
 			$("select[name='carBrandId']").empty();
 			$("select[name='carBrandId']").append("<option value=''>-请选择-</option>");//因为加的是onchange事件，需要触发
 		  	$.each(data.result, function(i, item) {
 		        $("select[name='carBrandId']").append("<option value='"+item.brandId+"'>"+item.brandName+"</option>");
 		    });
-		  	
+
 		  	$("select[name='carStyleId']").empty();
 			$("select[name='carYearId']").empty();
 		},
@@ -29,9 +29,9 @@ function getStylelist() {
 	$("select[name='carStyleId']").empty();
 	$("select[name='carYearId']").empty();
 	if(brandId!=""){
-		var n = "GET", 
-		a = "carStylelist/"+brandId, 
-		i = null, 
+		var n = "GET",
+		a = "carStylelist/"+brandId,
+		i = null,
 		e = function(data) {
 			$("select[name='carStyleId']").append("<option value=''>-请选择-</option>");//因为加的是onchange事件，需要触发
 			$.each(data.result, function(i, item) {
@@ -49,9 +49,9 @@ function getYearlist() {
 	var styleId = $("select[name='carStyleId'] option:selected").val();
 	$("select[name='carYearId']").empty();
 	if(brandId!="" && styleId!=""){
-		var n = "GET", 
-		a = "carYearlist/"+brandId+"/"+styleId, 
-		i = null, 
+		var n = "GET",
+		a = "carYearlist/"+brandId+"/"+styleId,
+		i = null,
 		e = function(data) {
 			$("select[name='carYearId']").empty();
 			$.each(data.result, function(i, item) {
@@ -95,9 +95,9 @@ function saveCarInfo(){
 	}else if(requireDate==""){
 		alert("请选择预约服务时间");
 	}else{
-		var n = "POST", 
-		a = "saveTempOrderCarInfo", 
-		i = formInfo, 
+		var n = "POST",
+		a = "saveTempOrderCarInfo",
+		i = formInfo,
 		e = function(n) {
 			var ruleId = getUrlParam("ruleId");
 //		type=3 表示特卖
@@ -106,23 +106,7 @@ function saveCarInfo(){
 			alert(n.message == null ? "保存车辆信息失败，请稍后重试！" : n.message);
 		};
 		common.invokeApi(n, a, i, null, e, r)
-		
+
 	}
-	
-}
-function createOrder(order) {
-	o.control.paying = true;
-	if (o.model.order != {} && o.model.order.id > 0) {
-		requestPay();
-		return;
-	}
-	var n = "POST", a = "createOrder", 
-	i = order, e = function(n) {
-		o.model.order = n.result;
-		requestPay();
-	}, r = function(n) {
-		alert(n.message == null ? "订单创建失败，请稍后重试！" : n.message);
-		o.control.paying = false;
-	};
-	common.invokeApi(n, a, i, null, e, r)
+
 }

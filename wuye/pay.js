@@ -79,7 +79,6 @@ avalon.ready(function() {
 				o.cartotalCountNormal = n.result.bills_size;
 				o.pay_least_month = n.result.pay_least_month;
 				o.totalNotPay = n.result.total_not_pay;
-				o.reduceMode = n.result.reduce_mode;
 				if(o.tabs[2].active && o.cartotalCountNormal==0){
 					o.hint = "缴纳停车费需要先绑定房屋哦。  请在  “社区物业-->我是业主” 中进行绑定。"
 				}
@@ -155,7 +154,6 @@ avalon.ready(function() {
 				o.hint = "缴纳停车费需要先绑定房屋哦。  请在  “社区物业-->我是业主” 中进行绑定。"
 			}
         },
-        
         
         /**账单**/
         dropdownCollapsed: true,
@@ -245,7 +243,6 @@ avalon.ready(function() {
         	}
         	o.totalPrice=price.toFixed(2);
         },
-        
         selectedAll: false,
         
         /*绑定房屋支付--全选  start */
@@ -323,7 +320,7 @@ avalon.ready(function() {
         	}
         	if(service_fee_name=='公共车位停车费' || service_fee_name=='固定车位停车费')
         	{
-        		o.permit_skip_car_pay=1;
+				o.permit_skip_car_pay=1;
         		if(o.permit_skip_car_pay==1) {/*不可跳 必须连续*/
         			for (var i = 0; i <= idx; i++) {
         				if (o.quickbills[i].pay_status=="02") {
@@ -347,7 +344,7 @@ avalon.ready(function() {
 									}
 								}
 							}
-        				}
+						}
                     }
             		for (var i = idx+1; i < o.quickbills.length; i++) {
             			if (o.quickbills[i].pay_status=="02") {
@@ -493,8 +490,11 @@ avalon.ready(function() {
      			}
 			}
             var pay_addr = billList[0].pay_cell_addr;
-            var url = MasterConfig.C("basePageUrl")+"paymentdetail.html?billIds="+bills+
-            	"&stmtId="+o.stmtId+"&payAddr="+escape(pay_addr)+"&totalPrice="+total_pay+"&reduceMode="+o.reduceMode;
+            //var url = MasterConfig.C("basePageUrl")+"paymentdetail.html?billIds="+bills+"&stmtId="+o.stmtId+"&payAddr="+escape(pay_addr)+"&totalPrice="+total_pay
+
+			var url = MasterConfig.C("payPageFolder")+MasterConfig.C("payPageSuffix");
+            url += "paymentdetail.html?billIds="+bills+"&stmtId="+o.stmtId+"&payAddr="+escape(pay_addr)+"&totalPrice="+total_pay+"&reduceMode="+o.reduceMode;
+            url += "&basePageUrl="+MasterConfig.C("basePageUrl");
             window.location.href = url;
         }
     });
@@ -504,31 +504,6 @@ avalon.ready(function() {
      */
     function checkUserRegister(){
     	common.checkRegisterStatus();
-    	/*var n = "GET",
-        a = "userInfo",
-        i = null,
-        e = function(n) {
-			console.log(JSON.stringify(n));
-			if(n.result == null||n.result==""){
-				alert("新用户请先注册。");
-				toRegisterAndBack();
-				return false;
-			}
-			var tel = n.result.tel;
-			if(tel==null || tel == '' ){
-				alert("新用户请先注册。");
-				toRegisterAndBack();
-				return false;
-			}
-    	},
-        r = function(n) {
-        	if(n.errorCode==40001){
-        		alert("新用户请先注册。");
-        		toRegisterAndBack();
-        	}
-	        return false;
-        };
-        common.invokeApi(n, a, i, null, e, r)*/
     	
     }
     
@@ -653,9 +628,9 @@ avalon.ready(function() {
 
     change2parkTab();
 	initWechat(['scanQRCode']);
-	checkUserRegister();
+    checkUserRegister();
     queryBillList();
-	avalon.scan(document.body);
+    avalon.scan(document.body);
     //share.default_send();
     FastClick.attach(document.body); 
     checkFromShare();
