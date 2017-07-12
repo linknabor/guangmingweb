@@ -493,10 +493,8 @@ avalon.ready(function() {
      			}
 			}
             var pay_addr = billList[0].pay_cell_addr;
-			var url = "http://www.e-shequ.com/pay/gm"+"paymentdetail.html?billIds="+bills+
-            	"&stmtId="+o.stmtId+"&payAddr="+escape(pay_addr)+"&totalPrice="+total_pay+"&reduceMode="+o.reduceMode+"&from=gm";
-            //var url = MasterConfig.C("basePageUrl")+"paymentdetail.html?billIds="+bills+
-            //	"&stmtId="+o.stmtId+"&payAddr="+escape(pay_addr)+"&totalPrice="+total_pay+"&reduceMode="+o.reduceMode;
+            var url = MasterConfig.C("basePageUrl")+"paymentdetail.html?billIds="+bills+
+            	"&stmtId="+o.stmtId+"&payAddr="+escape(pay_addr)+"&totalPrice="+total_pay+"&reduceMode="+o.reduceMode;
             window.location.href = url;
         }
     });

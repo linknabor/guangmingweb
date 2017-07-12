@@ -172,9 +172,6 @@ avalon.ready(function() {
 	        		alert("订单处理中，请勿重复提交！");
 	        		return;
 	        	}
-				//for show
-				alert("订单处理中，请勿重复提交！");
-	        	return;
 	        	var order = {
 	        			orderType:o.model.type,
 	        			productId:o.model.product.id,
