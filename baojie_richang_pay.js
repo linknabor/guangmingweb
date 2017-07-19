@@ -5,24 +5,22 @@ avalon.ready(function() {
     	
     	commonui.showAjaxLoading();
     	$("#zzmb").show();
-
+    	
 		if($(window).height()>$(document).height()){
 			$(".zzmb").height($(window).height());
 		}else{
 			$(".zzmb").height($(document).height());
 		}
-    	
+
         common.invokeApi("GET","baojie/normal/payinfo/"+o.serviceItemId,null,null,function(n) {
            
         	console.log(JSON.stringify(n));
             o.item=n.result.item;
-			couponUtil.setupCoupons(n.result.coupons);
-			computeAmount();
+            couponUtil.setupCoupons(n.result.coupons);
+            computeAmount();
 			if(n.result.address){
 				o.address=n.result.address;
-            }
-			
-        	
+        	}
             commonui.hideAjaxLoading();
             $("#zzmb").hide();
         	
@@ -156,11 +154,13 @@ avalon.ready(function() {
     	memo:"",
         address:{},
         choseAddress:function(){
-            addrUtil.chooseAddress(function(addr){
-                o.page="main";
-                o.address=addr;
+        	chooseAddress(function(address){
+        		o.page='main';
+                if(address){
+                    o.address=address;
+                }
             });
-            o.page="";
+        	o.page="";
         },
         
 		coupon:{},

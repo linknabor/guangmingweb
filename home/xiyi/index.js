@@ -43,7 +43,7 @@ avalon.ready(function(){
 		$id:"root",
 		washindex:[],
 		cities:[
-			{id:19,name:"上海"}
+			{id:2,name:"上海"}
 		],
 		maincity:{},
 		currentPage:"list",
