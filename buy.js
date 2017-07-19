@@ -29,7 +29,7 @@ function computeAmount(){
 	o.model.postFee = pf.toFixed(2);
 	o.model.amount = a.toFixed(2);
 	if(ta>0) {
-	o.model.totalAmount = ta.toFixed(2);
+        o.model.totalAmount = ta.toFixed(2);
 	} else {
 	    o.model.totalAmount = "0.01";
 	}
@@ -48,7 +48,9 @@ avalon.ready(function() {
 			console.log("success:" + JSON.stringify(n));
 			o.model.product = n.result.product;
 			o.model.rule = n.result.rule;
-			o.model.address = n.result.address;
+			if(n.result.address){
+				o.addr.checkedAddress = n.result.address;
+			}
 			computeAmount();
             initWechat(['chooseWXPay','onMenuShareTimeline','onMenuShareAppMessage']);
     	},
@@ -113,7 +115,7 @@ avalon.ready(function() {
     		location.href=MasterConfig.C("basePageUrl")+"group/success.html?orderId="+o.model.order.id;
     	},
         r = function() {
-    		alert("订单处理中，请稍后查看状态！")
+    		//alert("订单处理中，请稍后查看状态！")
     		location.href=MasterConfig.C("basePageUrl")+"orderdetail.html?orderId="+o.model.order.id;
     		//location.href=MasterConfig.C("basePageUrl")+"group/success.html?orderId="+o.orderId;
     	};
@@ -170,12 +172,15 @@ avalon.ready(function() {
 	        		alert("订单处理中，请勿重复提交！");
 	        		return;
 	        	}
+				//for show
+				//alert("订单处理中，请勿重复提交！");
+	        	//return;
 	        	var order = {
 	        			orderType:o.model.type,
 	        			productId:o.model.product.id,
 	        			ruleId:o.model.rule.id,
 	        			count:o.model.count,
-	        			serviceAddressId:o.model.address.id,
+	        			serviceAddressId:o.addr.checkedAddress.id,
 	        			memo:o.model.comment,
 	        			receiveTimeType:o.model.receiveTimeType
 	        	 }
@@ -183,7 +188,7 @@ avalon.ready(function() {
 	        	if(o.model.coupon != null) {
 	        		order.couponId=o.model.coupon.id;
 	        	}
-	        	if(o.model.address.id==0){
+	        	if(o.addr.checkedAddress==null||o.model.address.id==0){
 	        		alert("请选择地址！");
 	        		return;
 	        	}
@@ -191,12 +196,9 @@ avalon.ready(function() {
 	        },
 	        showAddress:function(){
 	        	o.control.currentPage='addrlist';
-	        	chooseAddress(function(address){
-                    if(address){
-                        o.model.address=address;
-                    }
-                    o.control.currentPage='main';
-                });
+	        	if(o.addr.addresses.length==0) {
+	        		queryAddress();
+	        	}
 	        },
 	        showCoupons:function(){
 	        	o.control.currentPage='coupons';
@@ -208,6 +210,7 @@ avalon.ready(function() {
 	            this.focus();
 	        }
         },
+        addr:addrModel,
         /** 选择送货日期 */
         datechoooser:{
         	time: '任何时间',
@@ -250,7 +253,15 @@ avalon.ready(function() {
         }
     });
 
-  
+    o.$watch("location", function(t){
+    	if(o.addr.city.name == null||o.addr.county.name == null||o.addr.city.name == ""||o.addr.county.name == "") {
+    		alert('请先选择你所在的区域！');
+    		return;
+    	}
+        if(o.location!=null && o.location.length>=2 && o.location!=o.addr.suggestion._name) {
+        	getSuggestion(o.addr.city.name,o.location);
+        }
+    });
     avalon.scan(document.body);
     if(common.checkRegisterStatus()) {
     	getTypeAndId();

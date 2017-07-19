@@ -15,7 +15,7 @@ var MasterConfig = function() {
         
         appId: "wx89c743b2fa762a2c",
         oauthUrl: "http://open.weixin.qq.com/connect/oauth2/authorize?",
-        oauthUrlPostFix:"&response_type=code&scope=snsapi_base&state=123#wechat_redirect",
+        oauthUrlPostFix:"&response_type=code&scope=snsapi_userinfo&state=123#wechat_redirect",
         bindAppId: "wx5b1a7c252c3cbc26",
 
         shop_name: "悦生活",

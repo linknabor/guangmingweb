@@ -51,6 +51,7 @@ avalon.ready(function() {
 					setTimeout(initColl,3000);
 				}
 			}
+			
         },
         r = function(n) {
         	alert(n.message==null?"获取团购信息失败！":n.message);
@@ -120,7 +121,12 @@ avalon.ready(function() {
         buy:function(){
 
         	if(common.checkRegisterStatus()&&o.rule.id){
-        		location.href="../buy.html?type=3&ruleId="+o.rule.id;
+        		//location.href="../buy.html?type=3&ruleId="+o.rule.id;
+				var url = MasterConfig.C("payPageFolder")+MasterConfig.C("payPageSuffix");
+				url += "buy.html";
+				url += "?type=3&ruleId="+o.rule.id;
+				url += "&basePageUrl="+escape(MasterConfig.C("basePageUrl"));
+				location.href=url;
         	}
         },
 

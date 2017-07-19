@@ -23,7 +23,7 @@ avalon.ready(function() {
         banners:[],
         item:{price:0},
         gotoPay:function(){
-            if(o.item.id){
+            if(common.checkRegisterStatus()&&o.item.id){
                 var url = MasterConfig.C("payPageFolder")+MasterConfig.C("payPageSuffix");
                 url += "baojie_richang_pay.html?item="+o.item.id;
                 url += "&basePageUrl="+escape(MasterConfig.C("basePageUrl"));
