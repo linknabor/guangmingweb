@@ -204,7 +204,7 @@ avalon.ready(function() {
     }
     
     function notifyPaySuccess() {
-    	var reqUrl = "noticePayed?billId="+o.billId+"&stmtId="+o.stmtId+"&tradeWaterId="+o.tradeWaterId+"&packageId="+o.packageId+"&feePrice="+o.totalPrice;
+    	var reqUrl = "noticePayed?billId="+o.billId+"&stmtId="+o.stmtId+"&tradeWaterId="+o.tradeWaterId+"&packageId="+o.packageId+"&feePrice="+o.totalPrice+"&bind_switch="+o.bind_switch;
     	if(o.model.coupon!=null){
     		if(o.model.couponAmout!=0){
     			reqUrl += "&couponId="+o.model.coupon.id;
@@ -321,6 +321,18 @@ avalon.ready(function() {
         		return false;
         	}
         	o.currentPage='coupons';
+        },
+        bind_switch:"1",
+        CheckBoxSelected:function(obj,flag){
+			var boxArray = document.getElementsByName("flag");
+			for(var i=0;i<=boxArray.length-1;i++){
+				if(boxArray[i]==obj && obj.checked){
+					boxArray[i].checked = true;
+					o.bind_switch = flag;
+				}else{
+					boxArray[i].checked = false; 
+				}
+			}
         },
         
         payInfo:{},
