@@ -14,7 +14,7 @@
 <script type="text/jscript" src="../static/js/fastclick.min-1.0.6.js?v=20151217"></script>
 <script type="text/jscript" src="../static/js/avalon.js"></script>
 <script type="text/jscript" src="../static/js/common_v3.js?v=20151217"></script>
-<script type="text/jscript" src="myhouse.js?v=201511217"></script>
+<script type="text/jscript" src="myhouse.js?v=20151217"></script>
 <style type="text/css">
 	.avatar-wrap {
 		height: 42rem;
@@ -49,6 +49,39 @@
 		background-size: 20px;
 		background-position: center;
 	}
+	
+	.tab-title {
+		display: inline-block;
+		width: 50%;
+		color: #a6937c;
+		font-size: 15px;
+		text-align: center;
+		padding: 15px 0;
+		border-bottom: 1px solid #d4cfc8;
+	}
+	 .tab-title.active {
+		color: #ff8a00;
+		border-color: #ff8a00;
+	}
+    
+    .divstyle
+    {
+    	width: 100%;
+    	font-size: 16px;
+    	margin: 10px 0 10px 10px;
+    	color: #a6937c;
+    }
+    .divstyle1
+    {
+    	width: 100%;
+    	font-size: 16px;
+    	margin: 10px 0 10px 25px;
+    	color: #a6937c;
+    }
+    .spanstyle
+    {
+    	margin: 0 39px;
+    }
 </style>
 </head>
 <body ms-controller="root">
@@ -73,11 +106,26 @@
 </section>
 
 <section ms-visible="currentPage=='addHouse'">
+<!-- 
+	<div class="tab">
+		<span class="tab-title" ms-repeat-tab="tabs" ms-class="active:tab.active" ms-click="changeTab($index)">{{tab.name}}</span>
+	</div>
+ -->
+	<div ms-visible="tabs[0].active">
         <div class="lite-divider ov" style="margin-top:35px;margin-left:15px;margin-right:15px;">
             <input placeholder="输入账单编号绑定房屋" class="fs15 pb15 hidden-input" style="text-align:left" ms-duplex-string="stmtId">
             <i class="fr scan-icon pt10" ms-click="scan"></i>
         </div>
 		<a href="#" class="btn" style="margin-top: 60px" ms-click="getHouse">提交</a>
+	</div>
+	
+	<div ms-visible="tabs[1].active">
+		<div class="divstyle"><span style="margin: 0 30px" >小区名称：</span><select style="width: 50%;" ms-duplex="sectSelected"><option ms-repeat-sect="sect" ms-attr-value="sect.id">{{sect.name}}</option></select></div>
+		<div class="divstyle1"><span class="spanstyle">楼宇：</span><select style="width: 50%;" ms-duplex="buildSelected"><option ms-repeat-build="build" ms-attr-value="build.id">{{build.name}}</option></select></div>
+		<div class="divstyle1"><span class="spanstyle">门牌：</span><select style="width: 50%;" ms-duplex="unitSelected"><option ms-repeat-unit="unit" ms-attr-value="unit.id">{{unit.name}}</option></select></div>
+		<div class="divstyle1"><span class="spanstyle">室号：</span><select style="width: 50%;" ms-duplex="houseSelected"><option ms-repeat-house="house" ms-attr-value="house.id">{{house.name}}</option></select></div>
+		<a href="#" class="btn" style="margin-top: 60px" ms-click="getHouse">提交</a>
+	</div>
 </section>
 
 <section ms-visible="currentPage=='chooseHouse'">
