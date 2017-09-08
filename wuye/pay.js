@@ -733,7 +733,6 @@ avalon.ready(function() {
 			if("03"==data_type)
 			{
 				o.build = n.result.build_info;
-				//o.buildSelected = o.build[0];
 			}else if("02"==data_type)
 			{
 				o.unit = n.result.unit_info;
@@ -746,9 +745,12 @@ avalon.ready(function() {
         	if("03"==data_type)
 			{
 				o.build = [];
+				o.unit = [];
+				o.house = [];
 			}else if("02"==data_type)
 			{
 				o.unit = [];
+				o.house = [];
 			}else if("01"==data_type)
 			{
 				o.house = [];
