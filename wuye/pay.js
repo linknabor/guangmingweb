@@ -164,6 +164,7 @@ avalon.ready(function() {
         selectedAll: false,
         cellselectedAll: false,
         cellbills:[],
+		oldhouseId:'',
         changeTab: function(idx) {
         	
             for (var i = 0, len = o.tabs.length; i < len; i++) {
@@ -638,7 +639,13 @@ avalon.ready(function() {
             	commonui.showMessage("没有更多啦");
             	commonui.hideAjaxLoading();
     		} else {
-    			o.cellbills= o.cellbills.concat(n.result.bill_info);
+    			if(o.oldhouseId == o.house_id)
+    			{
+    				o.cellbills= o.cellbills.concat(n.result.bill_info);
+    			}else
+    			{
+    				o.cellbills= n.result.bill_info;
+    			}
     			o.pay_least_month = n.result.pay_least_month;
 	            o.reduceMode = n.result.reduce_mode;
 	            buildRuleDisplay(o.ruleId, o.rule);
@@ -720,7 +727,9 @@ avalon.ready(function() {
     	getCellMng(o.sect_id,o.build_id,o.unit_id,'01');
     })
     o.$watch("houseSelected", function (id) {
+		o.oldhouseId = o.house_id;
     	o.house_id = id;
+		commonui.showAjaxLoading();
     	loadNextPageNormalHouse();
     })
     
