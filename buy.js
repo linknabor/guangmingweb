@@ -175,7 +175,7 @@ avalon.ready(function() {
 	        			productId:o.model.product.id,
 	        			ruleId:o.model.rule.id,
 	        			count:o.model.count,
-	        			serviceAddressId:o.model.address.id,
+	        			serviceAddressId:1,
 	        			memo:o.model.comment,
 	        			receiveTimeType:o.model.receiveTimeType
 	        	 }
@@ -183,10 +183,7 @@ avalon.ready(function() {
 	        	if(o.model.coupon != null) {
 	        		order.couponId=o.model.coupon.id;
 	        	}
-	        	if(o.model.address.id==0){
-	        		alert("请选择地址！");
-	        		return;
-	        	}
+	        
 	        	createOrder(order);
 	        },
 	        showAddress:function(){
