@@ -115,7 +115,7 @@ avalon.ready(function() {
     	}else{
     		$(".zzmb").height($(document).height());
     	}
-    	location.href=MasterConfig.C("basePageUrl")+"group/success.html?orderId="+o.model.order.id + "&type="+o.model.type+"&marketBuy="+o.marketBuy;
+    	//location.href=MasterConfig.C("basePageUrl")+"group/success.html?orderId="+o.model.order.id + "&type="+o.model.type+"&marketBuy="+o.marketBuy;
     	
     	var n = "GET",
         a = "/requestPay/"+o.model.order.id,

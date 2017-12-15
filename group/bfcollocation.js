@@ -12,7 +12,9 @@ avalon.ready(function() {
         i = null,
         e = function(n) {
 			o.collocation = n.result;
-			resetItems();
+			if(o.collocation){
+				resetItems();
+			}
         },
         r = function(n) {
         	alert(n.message==null?"获取优惠组合信息失败！":n.message);
