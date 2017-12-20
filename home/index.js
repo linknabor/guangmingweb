@@ -1,11 +1,20 @@
 avalon.ready(function() {
 	function query(){
+
+		var url1 = "http://res.m.suning.com/project/zhaoji/activiteDetails_1.html?activityCode=9604322307&storeType=0&storeCode=715N";
+		var picture1 = "http://img.e-shequ.com/Fjlnim5J5WY3bl4E9CmcWK-VpczF";
+		var url2 = "http://jiayanzhuangshi.com/index.php/Wap";
+		var picture2 = "http://img.e-shequ.com/Fj-et2rQia5xFfueLokkI6XujM5g";
+
+		o.banners = new Array({bannerUrl:url1, picture:picture1},{bannerUrl:url2, picture:picture2});
+		initSwiper();
+		
 		common.invokeApi("GET","pageconfig/daojia",null,null,function(n){
 			o.banners = n.result.banners;
 			o.jingxuan1=n.result.jingxuan1;
 			o.jingxuan2=n.result.jingxuan2;
 			o.jingxuan3=n.result.jingxuan3;
-			initSwiper();
+			//initSwiper();
 		},function(){
 			alert("页面获取信息错误，请稍后重试！");
 		})
