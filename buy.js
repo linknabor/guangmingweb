@@ -81,7 +81,7 @@ avalon.ready(function() {
     
     function requestPay() {
     	
-    	initWechat(['chooseWXPay','onMenuShareTimeline','onMenuShareAppMessage']);
+    	initWechat1(['chooseWXPay','onMenuShareTimeline','onMenuShareAppMessage']);
     	
     	var n = "GET",
         a = "/requestPay/"+o.model.order.id,
