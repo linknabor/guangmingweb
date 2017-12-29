@@ -180,26 +180,6 @@ function initWechat(apis) {
     common.invokeApi(n, a, i, null, e, r)
 }
 
-/**微信初始化**/
-function initWechat1(apis) {
-	var n = "POST",
-    a = "getUrlJsSign1",
-    i = {url:window.location.href.split('#')[0]},
-    e = function(n) {
-		wx.config({
-		    appId: n.result.appId, // 必填，公众号的唯一标识
-		    timestamp: n.result.timestamp , // 必填，生成签名的时间戳
-		    nonceStr: n.result.nonceStr, // 必填，生成签名的随机串
-		    signature: n.result.signature,// 必填，签名，见附录1
-		    jsApiList: apis // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
-		});
-    },
-    r = function(n) {
-    	alert(n.message==''?"获取支付权限失败！":n.message);
-    };
-    common.invokeApi(n, a, i, null, e, r)
-}
-
 function initShareConfig(title,link,img,desc){
 	if(link.indexOf(MasterConfig.C("basePageUrl"))>=0
 			&&link.indexOf('shareCode')<0

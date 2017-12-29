@@ -51,7 +51,7 @@ avalon.ready(function() {
 			o.addr.checkedAddress = n.result.address;
 			o.model.supportedAddress = n.result.supportedAddress;
 			computeAmount();
-            initWechat(['chooseWXPay','onMenuShareTimeline','onMenuShareAppMessage']);
+            //initWechat1(['chooseWXPay','onMenuShareTimeline','onMenuShareAppMessage']);
     	},
         r = function() {
     		alert("订单处理中，请稍后再试！")
@@ -81,12 +81,19 @@ avalon.ready(function() {
     
     function requestPay() {
     	
-    	initWechat1(['chooseWXPay','onMenuShareTimeline','onMenuShareAppMessage']);
-    	
     	var n = "GET",
         a = "/requestPay/"+o.model.order.id,
         i = null,
         e = function(n) {
+
+			wx.config({
+				appId: n.result.appId, // 必填，公众号的唯一标识
+				timestamp: n.result.timestamp , // 必填，生成签名的时间戳
+				nonceStr: n.result.nonceStr, // 必填，生成签名的随机串
+				signature: n.result.signature,// 必填，签名，见附录1
+				jsApiList: ['chooseWXPay'] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
+			});
+
         	wx.chooseWXPay({
               "timestamp":n.result.timestamp,
               "nonceStr":n.result.nonceStr,
