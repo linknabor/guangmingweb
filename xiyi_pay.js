@@ -118,7 +118,6 @@ avalon.ready(function(){
 	}
 	function requestPay() {
 		
-		initWechat(['chooseWXPay']);
 		commonui.showAjaxLoading();
 		$("#zzmb").show();
 		if($(window).height()>$(document).height()){
@@ -127,17 +126,26 @@ avalon.ready(function(){
     		$(".zzmb").height($(document).height());
     	}
 		common.invokeApi("POST", "/yunxiyi/pay/"+o.orderId, null, null, function(n) {
-        	wx.chooseWXPay({
-              "timestamp":n.result.timestamp,
-              "nonceStr":n.result.nonceStr,
-              "package":n.result.pkgStr,
-              "signType":n.result.signType,
-              "paySign":n.result.signature,
+			
+			wx.config({
+    			appId: n.result.appId, // 必填，公众号的唯一标识
+    			timestamp: n.result.timestamp , // 必填，生成签名的时间戳
+    			nonceStr: n.result.nonceStr, // 必填，生成签名的随机串
+    			signature: n.result.signature,// 必填，签名，见附录1
+    			jsApiList: ['chooseWXPay'] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
+    		});
+
+            wx.chooseWXPay({
+            	"timestamp":n.result.timestamp,
+                "nonceStr":n.result.nonceStr,
+                "package":n.result.pkgStr,
+                "signType":n.result.signType,
+                "paySign":n.result.signature,
         	   success: function (res) {
-        	   	   common.invokeApi("GET", "/yunxiyi/notifyPayed/"+o.orderId);
+        	   	   //common.invokeApi("GET", "/yunxiyi/notifyPayed/"+o.orderId);
         	        // 支付成功后的回调函数
         		   alert("下单成功！");
-		    	   location.href="home/xiyi/success.html?oId="+o.orderId;
+		    	   location.href=MasterConfig.C("basePageUrl")+"home/xiyi/success.html?oId="+o.orderId;
         	   },
 	        	fail:function(res) {
 	     	    	alert(JSON.stringify(res));
