@@ -68,7 +68,7 @@ avalon.ready(function() {
 			console.log("success:" + JSON.stringify(n));
 			o.model.collocation = n.result.collocation;
 			o.model.items = n.result.cart.items;
-			o.model.address = n.result.address;
+			o.model.addresses = n.result.address;
 			computeAmount();
             initWechat(['chooseWXPay','onMenuShareTimeline','onMenuShareAppMessage']);
     	},
@@ -115,6 +115,7 @@ avalon.ready(function() {
     	}else{
     		$(".zzmb").height($(document).height());
     	}
+    	location.href=MasterConfig.C("basePageUrl")+"group/success.html?orderId="+o.model.order.id + "&type="+o.model.type+"&marketBuy="+o.marketBuy;
     	
     	var n = "GET",
         a = "/requestPay/"+o.model.order.id,
@@ -181,7 +182,7 @@ avalon.ready(function() {
         model:{
         	type:3,/**默认特卖*/
         	collocation: {},
-        	address:{},
+        	addresses:{},
         	items:[],
         	order:{},
         	totalAmount:0,
@@ -202,14 +203,14 @@ avalon.ready(function() {
 	        		return;
 	        	}
 	        	var order = {
-	        			serviceAddressId:o.model.address.id,
+	        			serviceAddressId:o.model.addresses.id,
 	        			memo:o.model.comment,
 	        			receiveTimeType:o.model.receiveTimeType
 	        	 }
 	        	if(o.model.coupon != null) {
 	        		order.couponId=o.model.coupon.id;
 	        	};
-	        	if(o.model.address.id==0){
+	        	if(o.model.addresses.id==0){
 	        		alert("请选择地址！");
 	        		return;
 	        	}
@@ -217,12 +218,16 @@ avalon.ready(function() {
 	        },
 	        showAddress:function(){
 	        	o.control.currentPage='addrlist';
-	        	chooseAddress(function(address){
-                    if(address){
-                        o.model.address=address;
-                    }
-                    o.control.currentPage='main';
-                });
+	        	if(o.addr.addresses.length==0) {
+	        		queryAddress();
+	        	}
+	        	
+//	        	chooseAddress(function(address){
+//                    if(address){
+//                        o.model.address=address;
+//                    }
+//                    o.control.currentPage='main';
+//                });
 	        },
 	        showCoupons:function(){
 	        	o.control.currentPage='coupons';
@@ -234,6 +239,8 @@ avalon.ready(function() {
 	            this.focus();
 	        }
         },
+        
+        addr:addrModel,
         /** 选择送货日期 */
         datechoooser:{
         	time: '任何时间',
