@@ -3,7 +3,7 @@ avalon.ready(function() {
 
     function getParam(){
     	//o.collId=getUrlParam("collId");
-    	o.collId=1;
+    	o.collId=2;
 //    	o.ruleId=getUrlParam("ruleId");
     }
 	function getCollocation() {
@@ -12,7 +12,10 @@ avalon.ready(function() {
         i = null,
         e = function(n) {
 			o.collocation = n.result;
-			resetItems();
+			if(o.collocation){
+				resetItems();
+			}
+			
         },
         r = function(n) {
         	alert(n.message==null?"获取优惠组合信息失败！":n.message);
@@ -59,7 +62,11 @@ avalon.ready(function() {
     		}
     	}
         common.invokeApi("POST", "collocation/saveToCart", {items:items}, null, function(n) {
-				location.href="../multibuy.html?marketBuy=1";
+        		var url = MasterConfig.C("payPageFolder")+MasterConfig.C("payPageSuffix");
+        		url += "multibuy.html?marketBuy=1";
+        		url += "&basePageUrl="+MasterConfig.C("basePageUrl");
+//				location.href="../multibuy.html?marketBuy=1";
+        		location.href = url;
 	        }, function(n) {
 	        	alert(n.message==null?"下单失败，请稍后重试！":n.message);
 	        });
