@@ -80,7 +80,6 @@ avalon.ready(function() {
 	}
 	function requestPay() {
 
-		initWechat(['chooseWXPay']);
 		commonui.showAjaxLoading();
 		$("#zzmb").show();
 		if($(window).height()>$(document).height()){
@@ -90,17 +89,26 @@ avalon.ready(function() {
 		}
 		
         common.invokeApi("POST", "/baojie/pay/"+o.billId, null, null, function(n) {
+			
+			wx.config({
+    			appId: n.result.appId, // 必填，公众号的唯一标识
+    			timestamp: n.result.timestamp , // 必填，生成签名的时间戳
+    			nonceStr: n.result.nonceStr, // 必填，生成签名的随机串
+    			signature: n.result.signature,// 必填，签名，见附录1
+    			jsApiList: ['chooseWXPay'] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
+    		});
+
             wx.chooseWXPay({
-              "timestamp":n.result.timestamp,
-              "nonceStr":n.result.nonceStr,
-              "package":n.result.pkgStr,
-              "signType":n.result.signType,
-              "paySign":n.result.signature,
+            	"timestamp":n.result.timestamp,
+                "nonceStr":n.result.nonceStr,
+                "package":n.result.pkgStr,
+                "signType":n.result.signType,
+                "paySign":n.result.signature,
                success: function (res) {
-                   common.invokeApi("POST", "baojie/notifyPayed/"+o.billId);
+                   //common.invokeApi("POST", "baojie/notifyPayed/"+o.billId);
                     // 支付成功后的回调函数
                    alert("下单成功！");
-                   location.href="home/baojie1/success.html?oId="+o.billId;
+                   location.href=MasterConfig.C("basePageUrl")+"home/baojie1/success.html?oId="+o.billId;
                },fail:function(res) {
          	    	alert(JSON.stringify(res));
          	    	o.paying=false;
@@ -181,7 +189,7 @@ avalon.ready(function() {
 
 
 	avalon.scan(document.body);
-	initWechat(['chooseWXPay']);
+	//initWechat(['chooseWXPay']);
     common.setTitle("日常保洁支付");
     common.checkRegisterStatus();
     initInfo();

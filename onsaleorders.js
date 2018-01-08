@@ -21,17 +21,25 @@ avalon.ready(function() {
         a = "/requestPay/"+o.orders[idx].id,
         i = null,
         e = function(n) {
-        	wx.chooseWXPay({
-              "timestamp":n.result.timestamp,
-              "nonceStr":n.result.nonceStr,
-              "package":n.result.pkgStr,
-              "signType":n.result.signType,
-              "paySign":n.result.signature,
+    		wx.config({
+				appId: n.result.appId, // 必填，公众号的唯一标识
+				timestamp: n.result.timestamp , // 必填，生成签名的时间戳
+				nonceStr: n.result.nonceStr, // 必填，生成签名的随机串
+				signature: n.result.signature,// 必填，签名，见附录1
+				jsApiList: ['chooseWXPay'] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
+			});
+    		
+    		wx.chooseWXPay({
+                "timestamp":n.result.timestamp,
+                "nonceStr":n.result.nonceStr,
+                "package":n.result.pkgStr,
+                "signType":n.result.signType,
+                "paySign":n.result.signature,
         	    success: function (res) {
                   	o.orders[idx].status=1;
                   	o.orders[idx].statusStr='配货中';
                   	
-                  	notifyPaySuccess();
+                  	//notifyPaySuccess();
         	    }
         	});
         },
@@ -151,7 +159,7 @@ avalon.ready(function() {
 		location.href = "logistics.html?com=" + logisticName+"&nu="+order.logisticNo; 
     }
     });
-    initWechat(['chooseWXPay']) ;
+    //initWechat(['chooseWXPay']) ;
     q(),
     avalon.scan(document.body),
     //share.default_send(),

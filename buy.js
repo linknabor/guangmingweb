@@ -81,6 +81,14 @@ avalon.ready(function() {
     
     function requestPay() {
     	
+    	commonui.showAjaxLoading();
+		$("#zzmb").show();
+		if($(window).height()>$(document).height()){
+    		$(".zzmb").height($(window).height());
+    	}else{
+    		$(".zzmb").height($(document).height());
+    	}
+		
     	var n = "GET",
         a = "/requestPay/"+o.model.order.id,
         i = null,
@@ -104,7 +112,17 @@ avalon.ready(function() {
         	        // 支付成功后的回调函数
         		   alert("下单成功！");
 		    	   location.href=MasterConfig.C("basePageUrl")+"group/success.html?orderId="+o.model.order.id + "&type="+o.model.type;
-        	   }
+        	   },fail:function(res) {
+	     	    	alert(JSON.stringify(res));
+	     	    	o.paying=false;
+		        	commonui.hideAjaxLoading();
+		        	$("#zzmb").hide();
+	      	    },cancel:function(res){
+					console.log(JSON.stringify(n));
+					o.paying=false;
+			        commonui.hideAjaxLoading();
+			        $("#zzmb").hide();
+				}
         	});
         },
         r = function(n) {

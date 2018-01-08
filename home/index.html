@@ -13,7 +13,7 @@
 	<script src="../static/js/fastclick.min-1.0.6.js"></script>
 	<script src="../static/js/avalon.js"></script>
 	<script src="../static/js/common_v3.js?v=20160301"></script>
-	<script type="text/jscript" src="index.js?v=20160301"></script>
+	<script type="text/jscript" src="index.js?v=20171226"></script>
  <style>
  body{
  	background-color: #EEEEEE;
@@ -68,7 +68,7 @@
  	line-height: 55px;
 }
  .xiyi_icon{
- 	background-image: url(../static/images/icon_btn_xiyi_03.png);
+ 	background-image: url('http://img.e-shequ.com/FrnlaH3v3HEef7p7dmaOjXRmhBcg');
  }
  .icon_title{
  	height:70px;
@@ -214,12 +214,12 @@
 	</div>
 	<div class="divider"></div>
 	<div class="contain_weixiu">
-		<img onclick="gotoProject(1)" src="../static/images/guanlifuwu2_03.png" class="icon_weixiu"/>
-		<img onclick="gotoProject(2)" src="../static/images/guanlifuwu2_05.png" class="icon_weixiu"/>
-		<img onclick="gotoProject(3)" src="../static/images/guanlifuwu2_07.png" class="icon_weixiu"/>
-		<img onclick="gotoProject(4)" src="../static/images/guanlifuwu2_12.png" class="icon_weixiu"/>
-		<img onclick="gotoProject(5)" src="../static/images/guanlifuwu2_13.png" class="icon_weixiu"/>
-		<img onclick="gotoProject(6)" src="../static/images/guanlifuwu2_14.png" class="icon_weixiu"/>
+		<img onclick="gotoProject(1)" src="http://img.e-shequ.com/FsoiRgaiVQgVAqvzfcEsNmoaDBEy" class="icon_weixiu"/>
+		<img onclick="gotoProject(2)" src="http://img.e-shequ.com/FjTEekykEzT2Ja4ktawdg1k6u2-u" class="icon_weixiu"/>
+		<img onclick="gotoProject(3)" src="http://img.e-shequ.com/FnkEZMivGEEohXrZDcpRRykt9Mfi" class="icon_weixiu"/>
+		<img onclick="gotoProject(4)" src="http://img.e-shequ.com/FoH8u0mi9iFr7oSCIdFS9xwJH1Go" class="icon_weixiu"/>
+		<img onclick="gotoProject(5)" src="http://img.e-shequ.com/FosgAVvMIQI7eI68XqFuZt_gD5pL" class="icon_weixiu"/>
+		<img onclick="gotoProject(6)" src="http://img.e-shequ.com/FugDN6FtuWBrjClmdo_JysSD7tsc" class="icon_weixiu"/>
 	</div>
 	<div ms-visible="jingxuan1.img">
 		<div class="week_sugg_img fl w40" ms-click="gotoPage(jingxuan1.url)" ms-css-background-image="url('{{jingxuan1.img}}')" ></div>	
@@ -229,15 +229,16 @@
 		</div>
 	</div>
 	<div class="line">&nbsp;</div>
+	<!--
 	<div class="top_area">
 		<div class="fl w40">
-			<a class="bg_fafffa" href="xiyi/index.html"><i class="icon xiyi_icon fl"></i><span class="icon_title">洗衣</span></a>
+			<a class="bg_fafffa" href="http://www.51tbjf.com/h5.html#/middlePage"><i class="icon xiyi_icon fl"></i><span class="icon_title">洗衣</span></a>
 			<a class="bg_f9ffff" href="#" onclick="gotoProject(7)"><i class="icon jiadian_icon fl"></i><span class="icon_title">家电</span></a>
 		</div>
 		<a class="fl w30 txtcenter bg_fdfffb" href="baojie1/index.html"><i class="jiazheng_icon icon w100 height60px"></i><span class="icon_title">家政服务</span></a>
 		<a class="fl w30 txtcenter bg_ffffff" href="idxlist.html?type=6"><i class="guanai_icon icon w100 height60px"></i><span class="icon_title">关爱父母</span></a>
 	</div>
-	
+	-->
 	<div style="height: 70px;width: 100%;clear: both;">&nbsp;</div>
 
 	<footer class="footer">
@@ -254,7 +255,22 @@
 <script type="text/javascript" src="../static/js/swiper.js"></script>
 <script type="text/javascript">
 function gotoProject(type){
-    location.href="../repair/chooseproject.html?repairType="+type;
+	var url = "";
+	if(type==1){
+		url = "https://www.e-shequ.com/guangming/weixin/group/onsalesitem.html?type=11";
+	}else if(type==2){
+		url = "https://www.e-shequ.com/guangming/weixin/group/onsalesitem.html?type=12";
+	}else if (type==3){
+		url = "https://www.e-shequ.com/guangming/weixin/group/onsalesitem.html?type=14";
+	}else if (type==4){
+		url = "https://www.e-shequ.com/guangming/weixin/group/onsalesitem.html?type=23";
+	}else if (type==5){
+		alert("暂未开放，敬请期待");
+		return false;
+	}else if (type==6){
+		url = "https://www.e-shequ.com/guangming/weixin/group/onsalesitem.html?type=28";
+	}
+    location.href=url;
 }
 function initSwiper(){
     //头部展示图适应屏幕
