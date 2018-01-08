@@ -13,7 +13,7 @@
 	<script src="../static/js/fastclick.min-1.0.6.js?v=20151217"></script>
 	<script src="../static/js/avalon.js"></script>
 	<script src="../static/js/common_v3.js?v=20151217"></script>
-	<script src="pay.js?v=20170805"></script>
+	<script src="pay.js?v=2017009119"></script>
  	<style type="text/css">
         .tab-title {
             display: inline-block;
@@ -137,11 +137,9 @@
 <body class="plr15" ms-controller="root" id="indexDiv">
 	<!-- load -->
 		<div id="phoneErro"></div>
-		
 		<div id="phoneAjax" class="hidden">
 			<img src="http://7xnqht.com1.z0.glb.clouddn.com/loading.gif" style="width:40px;height40px;vertical-align: middle;">
 		</div>
-	
 	<!-- load -->
 	<div ms-visible="currentPage=='wuye'">
 	    <div class="tab">
@@ -177,10 +175,18 @@
 	        </div>
 	    </div>
 	    <div ms-visible="tabs[1].active">
-	    	<div class="divstyle1"><span class="spanstyle">小区：</span><select style="width: 50%;" ms-duplex="sectSelected"><option ms-repeat-sect="sect" ms-attr-value="sect.id">{{sect.name}}</option></select></div>
-			<div class="divstyle1"><span class="spanstyle">楼宇：</span><select style="width: 50%;" ms-duplex="buildSelected"><option ms-repeat-build="build" ms-attr-value="build.id">{{build.name}}</option></select></div>
-			<div class="divstyle1"><span class="spanstyle">门牌：</span><select style="width: 50%;" ms-duplex="unitSelected"><option ms-repeat-unit="unit" ms-attr-value="unit.id">{{unit.name}}</option></select></div>
-			<div class="divstyle1"><span class="spanstyle">室号：</span><select style="width: 50%;" ms-duplex="houseSelected"><option ms-repeat-house="house" ms-attr-value="house.id">{{house.name}}</option></select></div>
+	    	<div class="divstyle1"><span class="spanstyle">小区：</span><select id="sectType" style="width: 50%;" ms-duplex="sectSelected">
+	    	<option ms-attr-value="0" >请选择</option>
+	    	<option ms-repeat-sect="sect" ms-attr-value="sect.id">{{sect.name}}</option></select></div>
+			<div class="divstyle1"><span class="spanstyle">楼宇：</span><select id="buildType" style="width: 50%;" ms-duplex="buildSelected">
+			<option ms-attr-value="0" >请选择</option>
+			<option ms-repeat-build="build" ms-attr-value="build.id">{{build.name}}</option></select></div>
+			<div class="divstyle1"><span class="spanstyle">门牌：</span><select id="unitType" style="width: 50%;" ms-duplex="unitSelected">
+			<option ms-attr-value="0" >请选择</option>
+			<option ms-repeat-unit="unit" ms-attr-value="unit.id">{{unit.name}}</option></select></div>
+			<div class="divstyle1"><span class="spanstyle">室号：</span><select id="houseType" style="width: 50%;" ms-duplex="houseSelected">
+			<option ms-attr-value="0" >请选择</option>
+			<option ms-repeat-house="house" ms-attr-value="house.id">{{house.name}}</option></select></div>
 	        
 	        <div class="select-item" ms-repeat-item="cellbills" ms-class-selected="item.selected" ms-class-payed="item.pay_status!='02'" ms-click="cellselect($index)">
 	            <div class="ov fs15" style="padding:18px 15px;color:#3b3937">
