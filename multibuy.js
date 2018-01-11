@@ -106,7 +106,7 @@ avalon.ready(function() {
     
     function requestPay() {
     	
-    	initWechat(['chooseWXPay','onMenuShareTimeline','onMenuShareAppMessage']);
+    	
     	
     	commonui.showAjaxLoading();
 		$("#zzmb").show();
@@ -115,13 +115,23 @@ avalon.ready(function() {
     	}else{
     		$(".zzmb").height($(document).height());
     	}
-    	location.href=MasterConfig.C("basePageUrl")+"group/success.html?orderId="+o.model.order.id + "&type="+o.model.type+"&marketBuy="+o.marketBuy;
+    	//location.href=MasterConfig.C("basePageUrl")+"group/success.html?orderId="+o.model.order.id + "&type="+o.model.type+"&marketBuy="+o.marketBuy;
     	
     	var n = "GET",
         a = "/requestPay/"+o.model.order.id,
         i = null,
         e = function(n) {
+
+			wx.config({
+    			appId: n.result.appId, // 必填，公众号的唯一标识
+    			timestamp: n.result.timestamp , // 必填，生成签名的时间戳
+    			nonceStr: n.result.nonceStr, // 必填，生成签名的随机串
+    			signature: n.result.signature,// 必填，签名，见附录1
+    			jsApiList: ['chooseWXPay'] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
+    		});
+
         	wx.chooseWXPay({
+			  "appId":n.result.appId,
               "timestamp":n.result.timestamp,
               "nonceStr":n.result.nonceStr,
               "package":n.result.pkgStr,
@@ -289,4 +299,5 @@ avalon.ready(function() {
     	queryCoupon();
     }
     getParam();
+	initWechat(['onMenuShareTimeline','onMenuShareAppMessage']);
 });
