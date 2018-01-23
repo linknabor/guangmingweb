@@ -544,7 +544,7 @@ avalon.ready(function() {
         var st = $(window).scrollTop();
         var hook=loadheight-st;
 
-		var is_active = o.tabs[2].active;
+		var is_active = o.tabs[0].active;
 		var is_cell_active = o.tabs[1].active;
 		var tmp = page;
 		if (is_cell_active) {
