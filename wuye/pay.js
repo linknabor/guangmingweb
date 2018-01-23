@@ -473,7 +473,7 @@ avalon.ready(function() {
          			}
      			}
 			}
-            var pay_addr = billList[0].pay_cell_addr;
+			var pay_addr = billList[0].pay_cell_addr;
             //var url = MasterConfig.C("basePageUrl")+"paymentdetail.html?billIds="+bills+"&stmtId="+o.stmtId+"&payAddr="+escape(pay_addr)+"&totalPrice="+total_pay
 
 			var url = MasterConfig.C("payPageFolder")+MasterConfig.C("payPageSuffix");
