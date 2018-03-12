@@ -1,8 +1,8 @@
 avalon.ready(function() {
 	function query(){
 
-		var url1 = "http://res.m.suning.com/project/zhaoji/activiteDetails_1.html?activityCode=9604322307&storeType=0&storeCode=715N";
-		var picture1 = "http://img.e-shequ.com/Fjlnim5J5WY3bl4E9CmcWK-VpczF";
+		var url1 = "http://www.51tbjf.com/h5.html#/middlePage";
+		var picture1 = "http://img.e-shequ.com/FmpqLSkDf-MGvfqfUCa4T2R8K9jm";
 		var url2 = "http://jiayanzhuangshi.com/index.php/Wap";
 		var picture2 = "http://img.e-shequ.com/Fj-et2rQia5xFfueLokkI6XujM5g";
 
@@ -10,7 +10,7 @@ avalon.ready(function() {
 		initSwiper();
 		
 		common.invokeApi("GET","pageconfig/daojia",null,null,function(n){
-			o.banners = n.result.banners;
+			//o.banners = n.result.banners;
 			o.jingxuan1=n.result.jingxuan1;
 			o.jingxuan2=n.result.jingxuan2;
 			o.jingxuan3=n.result.jingxuan3;

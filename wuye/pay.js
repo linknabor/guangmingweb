@@ -711,6 +711,7 @@ avalon.ready(function() {
     
     o.$watch("sectSelected", function (id) {
 		o.sect_id = id;
+		//第一个参：小区ID； 第二个参：楼宇ID； 第三个参：门牌ID；第四个参：数据类型（03：楼宇；02：门牌；01：房屋）
 		getCellMng(o.sect_id, "", "", '03');
 		getCellMng(o.sect_id, "0", "", '02');
 		getCellMng(o.sect_id, "0", "0", '01');
