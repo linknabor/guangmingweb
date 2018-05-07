@@ -106,8 +106,6 @@ avalon.ready(function() {
     
     function requestPay() {
     	
-    	
-    	
     	commonui.showAjaxLoading();
 		$("#zzmb").show();
     	if($(window).height()>$(document).height()){
@@ -116,7 +114,6 @@ avalon.ready(function() {
     		$(".zzmb").height($(document).height());
     	}
     	//location.href=MasterConfig.C("basePageUrl")+"group/success.html?orderId="+o.model.order.id + "&type="+o.model.type+"&marketBuy="+o.marketBuy;
-    	
     	var n = "GET",
         a = "/requestPay/"+o.model.order.id,
         i = null,

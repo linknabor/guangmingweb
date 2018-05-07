@@ -2,13 +2,16 @@ var o;
 avalon.ready(function() {
 
     function getParam(){
-    	o.collId=getUrlParam("collId");
+    	o.collId=parseInt(getUrlParam("collId"));
     	o.ruleId=getUrlParam("ruleId");
     }
 	function getCollocation() {
-        var n = "GET",
-        a = "collocation/" + o.collId,
-        i = null,
+        var n = "POST",
+        a = "collocation",
+        i = {
+			firstType:'',
+            collId:o.collId
+		},
         e = function(n) {
 			o.collocation = n.result;
 			resetItems();
