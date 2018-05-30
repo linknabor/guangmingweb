@@ -196,9 +196,9 @@ avalon.ready(function() {
 	        },
 	        showAddress:function(){
 	        	o.control.currentPage='addrlist';
-	        	if(o.addr.addresses.length==0) {
+	        	//if(o.addr.addresses.length==0) {
 	        		queryAddress();
-	        	}
+	        	//}
 	        },
 	        showCoupons:function(){
 	        	o.control.currentPage='coupons';
