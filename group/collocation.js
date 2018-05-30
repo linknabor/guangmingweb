@@ -2,13 +2,16 @@ var o;
 avalon.ready(function() {
 
     function getParam(){
-    	o.collId=getUrlParam("collId");
+    	o.collId=parseInt(getUrlParam("collId"));
     	o.ruleId=getUrlParam("ruleId");
     }
 	function getCollocation() {
-        var n = "GET",
-        a = "collocation/" + o.collId,
-        i = null,
+        var n = "POST",
+        a = "collocation",
+        i = {
+			firstType:'',
+            collId:o.collId
+		},
         e = function(n) {
 			o.collocation = n.result;
 			resetItems();
@@ -57,7 +60,11 @@ avalon.ready(function() {
     		}
     	}
         common.invokeApi("POST", "collocation/saveToCart", {items:items}, null, function(n) {
-				location.href="../multibuy.html";
+				//location.href="../multibuy.html";
+				var url = MasterConfig.C("payPageFolder")+MasterConfig.C("payPageSuffix");
+        		url += "multibuy.html";
+        		url += "?basePageUrl="+MasterConfig.C("basePageUrl");
+				location.href = url;
 	        }, function(n) {
 	        	alert(n.message==null?"下单失败，请稍后重试！":n.message);
 	        });

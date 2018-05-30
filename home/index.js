@@ -1,11 +1,20 @@
 avalon.ready(function() {
 	function query(){
+
+		var url1 = "http://www.51tbjf.com/h5.html#/middlePage";
+		var picture1 = "http://img.e-shequ.com/FmpqLSkDf-MGvfqfUCa4T2R8K9jm";
+		var url2 = "http://jiayanzhuangshi.com/index.php/Wap";
+		var picture2 = "http://img.e-shequ.com/Fj-et2rQia5xFfueLokkI6XujM5g";
+
+		o.banners = new Array({bannerUrl:url1, picture:picture1},{bannerUrl:url2, picture:picture2});
+		initSwiper();
+		
 		common.invokeApi("GET","pageconfig/daojia",null,null,function(n){
-			o.banners = n.result.banners;
+			//o.banners = n.result.banners;
 			o.jingxuan1=n.result.jingxuan1;
 			o.jingxuan2=n.result.jingxuan2;
 			o.jingxuan3=n.result.jingxuan3;
-			initSwiper();
+			//initSwiper();
 		},function(){
 			alert("页面获取信息错误，请稍后重试！");
 		})

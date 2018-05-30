@@ -81,6 +81,11 @@ avalon.ready(function() {
 				o.pay_least_month = n.result.pay_least_month;
 				o.totalNotPay = n.result.total_not_pay;
 				o.reduceMode = n.result.reduce_mode;
+				
+				o.old_bill_id = n.result.old_bill_id;
+				o.old_bill_price = n.result.old_bill_price;
+				o.old_bill_date = n.result.old_bill_date;
+				o.old_cell_addr = n.result.old_cell_addr;
 				//if(o.tabs[2].active && o.cartotalCountNormal==0){
 				//	o.hint = "缴纳停车费需要先绑定房屋哦。  请在  “社区物业-->我是业主” 中进行绑定。"
 				//}
@@ -143,6 +148,10 @@ avalon.ready(function() {
         permit_skip_pay:1,
         permit_skip_car_pay:1,
         pay_least_month:0,
+        old_bill_id: '',
+        old_bill_price: 0.00,
+		old_bill_date: '',
+		old_cell_addr: '',
         currentPage:'wuye',
         sect_id:'',
         build_id:'',
@@ -152,6 +161,7 @@ avalon.ready(function() {
         build: [],
         unit: [],
         house: [],
+        oldbillSelected:"",
         sectSelected:"",
         buildSelected:"",
         unitSelected:"",
@@ -534,7 +544,7 @@ avalon.ready(function() {
         var st = $(window).scrollTop();
         var hook=loadheight-st;
 
-		var is_active = o.tabs[2].active;
+		var is_active = o.tabs[0].active;
 		var is_cell_active = o.tabs[1].active;
 		var tmp = page;
 		if (is_cell_active) {
@@ -570,7 +580,7 @@ avalon.ready(function() {
         a = "quickPayBillList/"+o.stmtId+"/"+page+"/"+o.totalCount,
         i = null,
         e = function(n) {
-    		if(n.result.bills_size==0) {
+    		if(n.result == null || n.result.bills_size==0) {
                 hasNext=false;
                 isloadPage = false;
             	commonui.showMessage("没有更多啦");
@@ -622,7 +632,7 @@ avalon.ready(function() {
         a = "billList?startDate="+o.startDate+"&endDate="+o.endDate +"&payStatus=02&currentPage="+housenormalPage+"&totalCount="+o.housetotalCountNormal+"&house_id="+o.house_id,
         i = null,
         e = function(n) {
-    		if(n.result.bills_size==0) {
+    		if(n.result == null || n.result.bills_size==0) {
                 hasNext=false;
                 isloadPage = false;
             	commonui.showMessage("没有更多啦");
@@ -701,17 +711,22 @@ avalon.ready(function() {
     
     o.$watch("sectSelected", function (id) {
 		o.sect_id = id;
-		getCellMng(o.sect_id,o.build_id,o.unit_id,'03');
-		getCellMng(o.sect_id,o.build_id,o.unit_id,'02');
-		getCellMng(o.sect_id,o.build_id,o.unit_id,'01');
+		//第一个参：小区ID； 第二个参：楼宇ID； 第三个参：门牌ID；第四个参：数据类型（03：楼宇；02：门牌；01：房屋）
+		getCellMng(o.sect_id, "", "", '03');
+		getCellMng(o.sect_id, "0", "", '02');
+		getCellMng(o.sect_id, "0", "0", '01');
     })
     o.$watch("buildSelected", function (id) {
     	o.build_id = id;
-    	getCellMng(o.sect_id,o.build_id,o.unit_id,'02');
+    	getCellMng(o.sect_id, o.build_id, "", '02');
+    	getCellMng(o.sect_id, o.build_id, "0", '01');
     })
     o.$watch("unitSelected", function (id) {
     	o.unit_id = id;
-    	getCellMng(o.sect_id,o.build_id,o.unit_id,'01');
+    	if (o.build_id=='') {
+    		o.build_id = '0';
+		}
+    	getCellMng(o.sect_id, o.build_id, o.unit_id, '01');
     })
     o.$watch("houseSelected", function (id) {
     	o.oldhouseId = o.house_id;
@@ -727,6 +742,8 @@ avalon.ready(function() {
     
     function getCellMng(sect_id,build_id,unit_id,data_type)
 	{
+    	commonui.showAjaxLoading();
+    	
 		var n = "GET",
         a = "getcellbyid?sect_id="+sect_id+"&build_id="+build_id+"&unit_id="+unit_id+"&data_type="+data_type,
         i = null,
@@ -734,11 +751,16 @@ avalon.ready(function() {
 			o.cellbills= [];
 			if ("03"==data_type) {
 				o.build = n.result.build_info;
+				o.unit = [];
+				o.house = [];
 			} else if("02"==data_type) {
 				o.unit = n.result.unit_info;
+				o.house = [];
 			} else if("01"==data_type) {
 				o.house = n.result.house_info;
 			}
+			isloadPage = false;
+            commonui.hideAjaxLoading();
         },
         r = function() {
         	if ("03"==data_type) {
@@ -751,6 +773,8 @@ avalon.ready(function() {
 			} else if("01"==data_type) {
 				o.house = [];
 			}
+        	isloadPage = false;
+        	commonui.hideAjaxLoading();
         };
         common.invokeApi(n, a, i, null, e, r)
 	}

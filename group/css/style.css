@@ -1,0 +1,226 @@
+*{
+  padding: 0;
+  margin: 0;
+}
+img{
+      vertical-align: top;
+  }
+ html{font-family: PingFangSC-Regular;} 
+.active-col{
+  color:red;
+}
+.clear{clear:both;}
+.header{
+  width: 100%;
+}
+.huore{color: #ff6600;background-color: #ffe1d3; width: 100%;height: 40px;line-height: 40px;text-align: center;}
+.heji{
+  position: fixed;
+  top:-40px;
+  height: 40px;
+  line-height: 40px;
+  background: #BD2630;
+  width: 100%;
+  color:#fff;
+  transition: all 0.3s;
+  text-align: center;
+}
+
+.firstType span{
+  font-size: 15px;line-height: 37px;width: 100%;display: block;
+}
+.firstType{
+  position: relative;
+}
+.left-lan{color:cyan;color:black;}
+.left-red{color: red;color:#BD2630}
+.left-hei{color:cyan;}
+/*.actives{
+  border-bottom: 1px solid #3190e8;
+  color: #3190e8;
+}*/
+.content{
+  width: 100%;
+  overflow: hidden;
+}
+.left{
+  top: 41px;
+  float: left;
+  width: 20%;
+  height: calc(100% - 80px);
+  /*height: 100%;*/
+  background: #f2f2f2;
+  overflow-y: auto;
+}
+.left ul{
+  list-style: none;
+}
+.left ul li{
+  /*padding: 15px 5px;*/
+  text-align: center;
+  /*border-bottom: 1px solid #ccc;*/
+  font-size: 14px;
+}
+.leftAllNum{
+  position: absolute;
+  right:0;
+  top:0;
+  color: #BD2630;
+  width: 18px;
+  height: 18px;
+  font-size: 14px;
+  font-weight: bold;
+  line-height: 18px;
+  display: none;
+  /*opacity: 0.8;*/
+}
+.right{
+  float: left;
+  width: 80%;
+  height: 100%;
+}
+.right ul{
+  list-style: none;
+  /*height: calc(100% - 80px);*/
+}
+.class-title{
+  /*padding: 7px 10px;*/
+  background: #f2f2f2;
+  line-height: 37px;
+  padding-left: 10px;
+}
+.item{
+  overflow: hidden;
+  width: 100%;
+  height: 100px;
+  padding: 10px;
+  border-bottom: 1px solid #eee;
+}
+.item-left{
+  float: left;
+  width: 30%;
+  height: 100%;
+}
+.item-right{
+  float: right;
+  background-color:white;
+  width: 60%;
+  height: 100%;
+  padding: 0 10px;
+}
+.item-img{
+  width: 100px;
+  height: 100px;
+  margin: auto;
+}
+.title{
+  width: 90%;
+  line-height: 20px;
+  height: 40px;
+  font-size: 13px;
+  color: #000000;
+  letter-spacing: 1.14px;
+  margin-top: 10px;
+}
+.subtitle{
+  width: 85px;
+  height: 22px;
+  float: right;
+  margin-top: 20px;
+  margin-right: 20px;
+  background: white;
+}
+.subtitle button{
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background-color: white;
+  border-style: none;
+  border:1px solid #ccc;
+  font-size: 22px;
+  line-height: 22px;
+}
+.num{
+  width: 30px;
+  border-style: none;
+  text-align: center;
+  line-height: 22px;
+  background-color: white;
+}
+.price{
+  width: 50px;
+  color: #bd2630;
+  letter-spacing: -0.25px;
+  height: 22px;
+  line-height: 22px;
+  float: left;
+  font-size: 13px;
+  margin-top: 20px;
+}
+.totalPriceBOx{
+  position: fixed;
+  height: 30px;
+  width: 100%;
+  background: red;
+  color: #fff;
+  bottom: 0px;
+  text-align: center;
+}
+#left>ul>li.active{
+  background:#fff;
+  width: 100%;line-height: 37px;
+}
+#left>ul>li.active ul{
+  height: auto;
+}
+#left>ul>li.active span{
+  color: #333;
+  font-weight: 700;
+}
+
+#left>ul>li>ul{
+  height: 0;
+  overflow: hidden;
+}
+.hejibot{
+  width: 100%;height: 188px;background-color:#fff;
+}
+.slhj{
+  text-align: right;padding:10px 30px 6px 10px;
+}
+.shopPrice{ 
+  font-size: 18px;
+}
+.shopNum{
+  font-size: 15px;
+}
+.hdyh{
+  padding:6px 30px 6px 30px;text-align:right;
+}
+.yhh{font-size: 14px;color: #ff8a00;}
+.buhan{font-size: 10px;}
+.youhuihou{text-align: right;padding:6px 30px 6px 10px}
+.youhui{font-size: 15px;/*text-align:left;padding:6px 30px 6px 10px*/}
+.jine{font-size: 18px;color: #ff8a00;}
+.yuandian{color: #ff8a00;font-size: 18px;}
+.peisong{text-align:right;padding:0px 30px 10px 30px;font-size: 14px}
+.buy{
+  position: fixed;
+  bottom: -15px;
+  left: -15px;
+  right: -15px;
+}
+.btn-buy{
+  display: block;
+  margin: 15px;
+  height: 44px;
+  line-height: 44px;
+  color: #fff!important;
+  font-size: 15px;
+  text-align: center;
+  background-color: #BD2630;
+  border-radius: 3px;
+  outline: none;
+  border: none;
+  text-decoration: none;
+}

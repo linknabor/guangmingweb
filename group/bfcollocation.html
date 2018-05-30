@@ -20,7 +20,7 @@
 
     <body>
       <div class="header">
-        <img src="img/top-img.png" alt="" style="width:100%">
+        <img src="../static/img/top-img.png" alt="" style="width:100%">
       </div>
       <!-- <p class="huore">活动火热进行中</p> -->
       <p class="heji">
@@ -46,7 +46,7 @@
         </div>
 
       </div>
-      <div  class="hejibot" style="display:none">
+      <div  class="hejibot" style="display: none;">
         <p class="slhj">
           <span class="shopNum">共&nbsp;<strong>0</strong>&nbsp;个商品</span>  
           <span class="shopPrice">合计￥&nbsp;<strong>0</strong>&nbsp;</span>  
@@ -59,7 +59,7 @@
           <!-- <hr style="width: 90%;margin: 0 auto"> -->
         </p>
         <p class="youhuihou">
-          <span class="yhh">优惠后金额&nbsp;</span><span class="buhan">(不含配送费)</span> <span class="sjzf">￥&nbsp;<strong>0</strong>&nbsp;</span>  
+          <span class="yhh">优惠后金额&nbsp;&nbsp;</span><span class="buhan">(不含配送费)</span> <span class="sjzf">￥&nbsp;<strong>0</strong>&nbsp;</span>  
         </p>
         <p class="peisong">
           <span class="yuandian">●</span>
@@ -86,7 +86,8 @@
         $('input[readonly]').on('focus', function() {
           $(this).trigger('blur');
         });
-		//$('.hejibot').hide();
+
+        // $('.hejibot').hide();
         var obj = {
           thisUlindex:0,
           int: function () {
@@ -132,7 +133,7 @@
             var _this = this;
             if ($('#right ul').eq(index).hasClass('hasdata')) {
               $.ajax({
-                url:'https://test.e-shequ.com/guangming/wechat/hexie/wechat/collocation',
+                url:'https://www.e-shequ.com/guangming/wechat/hexie/wechat/collocation',
                 type:'post',
                 dataType:'json',
                 contentType:'application/json',
@@ -208,7 +209,7 @@
           getNav: function () {
             var _this = this;
             $.ajax({
-              url: 'https://test.e-shequ.com/guangming/wechat/hexie/wechat/collocation/getCategory/2/',
+              url: 'https://www.e-shequ.com/guangming/wechat/hexie/wechat/collocation/getCategory/2/',
               type: 'GET',
               dataType: 'json',
               success: function (data) {
@@ -228,14 +229,15 @@
                     dataLiHtml = '';
                   }
                 })
-				//$('.hejibot').show();
+                // $('.hejibot').show();
+
                 qqqa = '<div style="width:80%;height:50px;background:cyan">'+123+'</div>'
                 console.log(ulhtml)
                 $('#left>ul').append(liHtml);
                 $('#left>ul>li').first().addClass('active');
                 // $('#left>ul>li').first().addClass('left-lan');
                 $('#right').append(ulhtml);
-				$('.hejibot').css('display', 'block');
+                $('.hejibot').css('display', 'block');
                 // $('#left>ul>li.active li:nth-child(1)').css("color","#bd2630") ;
                 _this.getlist($('.firstType').eq(0).find('span').html(),0);
                 _this.firstTypeClick()
@@ -372,7 +374,7 @@
           })
           // console.log(items);
           $.ajax({
-            url: 'https://test.e-shequ.com/guangming/wechat/hexie/wechat/collocation/saveToCart',
+            url: 'https://www.e-shequ.com/guangming/wechat/hexie/wechat/collocation/saveToCart',
             type: 'post',
             dataType:'json',
             contentType:'application/json',
@@ -382,9 +384,9 @@
             },
             success:function(){
               console.log("ok");
-              var url = "https://test.e-shequ.com/pay/gm";
+              var url = "https://www.e-shequ.com/pay/gm";
               url += "multibuy.html?marketBuy=1";
-              url += "&basePageUrl=https://test.e-shequ.com/guangming/weixin/";
+              url += "&basePageUrl=https://www.e-shequ.com/guangming/weixin/";
               location.href = url;
             }
           })

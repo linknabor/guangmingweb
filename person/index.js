@@ -55,6 +55,11 @@ avalon.ready(function() {
         },
         coupons:function(){
         	location.href=MasterConfig.C('basePageUrl')+"person/coupons.html";
+        },
+        onsaleorders:function() {
+        	var url = MasterConfig.C("payPageFolder")+MasterConfig.C("payPageSuffix");
+        	url += "onsaleorders.html";
+        	window.location.href = url;
         }
     });
     
