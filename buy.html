@@ -174,9 +174,9 @@
 			<a href="#" class="btn-plain add_btn_style" ms-visible="!model.address.receiveName" style="">选择收货地址</a>
 		</div>
 		<a  href="#" class="menu-link fs14 addr_detail" ms-visible="model.address.receiveName">
-			<span style="color:#3b3937;">{{model.address.receiveName}}</span>
-			<span style="margin-left:15px;color:#3b3937;">{{model.address.tel}}</span>
-			<div class="addr_location">{{model.address.province}}{{model.address.city}}{{model.address.county}}（{{model.address.xiaoquName}}）{{model.address.detailAddress}}</div>
+			<span style="color:#3b3937;" id="infoname">{{addr.checkedAddress.receiveName}}</span>
+			<span style="margin-left:15px;color:#3b3937;" id="infotel">{{addr.checkedAddress.tel}}</span>
+			<div class="addr_location" id="infoaddr">{{addr.checkedAddress.province}}{{addr.checkedAddress.city}}{{addr.checkedAddress.county}}（{{addr.checkedAddress.xiaoquName}}）{{addr.checkedAddress.detailAddress}}</div>
 		</a>
 		<div style="background:url(static/img/bg_line_location_bottom.png) repeat-x;height:2px;background-size: 100% 2px;">&nbsp;</div>
 	</div>

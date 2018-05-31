@@ -333,9 +333,16 @@
                     })
                 },
                 check: function(address) {
+					/*自己添加的*/
+					$('#infoname').text(address.receiveName) ;
+					$('#infotel').text(address.tel) ;
+					var str = address.province + address.city+ address.county+'('+address.xiaoquName+'）'+address.detailAddress;
+					$('#infoaddr').text(str) ;
+					/*结束*/
+					alert($('#infoaddr').text());
                     adroot.checkedAddress = address;
                     adroot.inuse=false;
-                    checkedAddrCallback(address);
+                    //checkedAddrCallback(address);
                 },
                 isChecked:function(address) {
                     return adroot.checkedAddress&&adroot.checkedAddress.id == address.id;
