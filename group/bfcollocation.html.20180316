@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <title>零售专区 </title>
+  <link rel="stylesheet" type="text/css" href="css/style.css">
+  <script src=""></script>
+  <style>
+    .num {
+      width: 30px;
+    }
+    img{
+      vertical-align: top;
+    }
+  </style>
+
+  <head>
+
+    <body>
+      <div class="header">
+        <img src="../static/img/top-img.png" alt="" style="width:100%">
+      </div>
+      <p class="huore">活动火热进行中</p>
+      <p class="heji">
+        <!-- <span class="zuoqq">满<strong class="duoqian"></strong>减<strong class="jikuai"></strong></span>&nbsp;&nbsp; -->
+        <span class="qq">合计￥<strong class="fff">0</strong></span>&nbsp;&nbsp;<span class="ggg">(已优惠<strong >0</strong>元)</span>
+      </p>
+      <div class="swiper-container" style="overflow: auto;">
+        <div class="swiper-wrapper" id="app">
+          <div class="swiper-slide">
+            <div class="content">
+              <div class="left" id="left">
+                <ul>
+
+                </ul>
+              </div>
+              <div class="right" id="right">
+
+              </div>
+              <div class="clear"></div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+      <div  class="hejibot">
+        <p class="slhj">
+          <span class="shopNum">共&nbsp;<strong>0</strong>&nbsp;个商品</span>  
+          <span class="shopPrice">合计￥&nbsp;<strong>0</strong>&nbsp;</span>  
+        </p>
+        <hr style="width: 90%;margin: 0 auto;border:1px solid #eee;height: 1px;overflow: hidden;">
+        <!--  当满减底价为0或者为0.0时不显示活动信息-->
+        <p class="hdyh" >
+          <span class="youhui">活动优惠</span> 
+          <span class="jine">&nbsp; -¥<strong>0</strong> </span>
+          <hr style="width: 90%;margin: 0 auto">
+        </p>
+        <p class="youhuihou">
+          <span class="yhh">优惠后金额&nbsp;&nbsp;</span><span class="buhan">(不含配送费)</span> <span class="sjzf">￥&nbsp;<strong>0</strong>&nbsp;</span>  
+        </p>
+        <p class="peisong">
+          <span class="yuandian">●</span>
+          <span class="peisongfei">配送费<strong>0</strong>元</span>
+          <span class="yhje">优惠后金额满<strong>0</strong>元免配送费</span>  
+        </p>
+      </div>
+      <div class="buy">
+        <div class="btn-buy">
+          立即购买
+        </div>
+      </div>
+      <!-- <div style="width: 100%;height: 100px;background-color: cyan;">
+        <h4>
+          <p class="shopNum">共计<span>0</span>件商品</p>  
+          <p class="shopPrice">合计￥<span>0</span></p>  
+        </h4>
+      </div> -->
+      <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+      <!-- <script src="http://www.jq22.com/jquery/vue.min.js"></script> -->
+      <script>
+
+        var obj = {
+          thisUlindex:0,
+          int: function () {
+            this.effect();
+            this.getNav();
+            this.shopcar();
+            // this.numChange(); // 直接修改购物车数量
+          },
+          effect: function () {
+            var _this = this
+            $(window).scroll(function () {
+              if ($(window).scrollTop() >= 150) {
+                // $('.swiper-container-ul').css('position', 'fixed');
+                $('.left').css('position', 'fixed');
+                $('.right').css({
+                  marginLeft : $('.left').width()
+                });
+              } else {
+                // $('.swiper-container-ul').css('position', '');
+                $('.left').css('position', '');
+                $('.right').css({
+                  marginLeft : '',
+                });
+              };
+              // 合计
+              if($(window).scrollTop() <= 40){
+                $('.heji').css({top: -40,});
+              }
+              else{
+                $('.heji').css({top: 0,});
+              }
+              $('#right ul').eq(_this.thisUlindex).find('li').each(function (){
+                var num = $(this).offset().top - $(window).scrollTop();
+                if(num <= 40){
+                  // $('#left>ul>li').eq(_this.thisUlindex).find('li').eq($(this).index()).addClass('left-lan').siblings().removeClass('left-lan');
+                  $('#left>ul>li').eq(_this.thisUlindex).find('li').eq($(this).index()).addClass('left-red').siblings().removeClass('left-red');
+                }
+              })
+            });
+          },
+
+          getlist: function (goods, index) {
+            var _this = this;
+            if ($('#right ul').eq(index).hasClass('hasdata')) {
+              $.ajax({
+                url:'https://www.e-shequ.com/guangming/wechat/hexie/wechat/collocation',
+                type:'post',
+                dataType:'json',
+                contentType:'application/json',
+                data:JSON.stringify({
+                  firstType:goods,
+                  collId:2,
+                }),
+                beforeSend:function (){
+                  $('#right ul').eq(index).append('<p>加载中···</p>')
+                },
+                success:function (data){
+                  $('#right ul').eq(index).find('p').remove();
+                  console.log(data);
+                  discountAmount = data.result.discountAmount;//优惠金额
+                  shipamount = data.result.shipAmount;//配送费
+                  freeshipAmount = data.result.freeShipAmount;//满*钱后免配送费
+                  creatList(data.result.products);
+                  satisfyAmount = data.result.satisfyAmount;
+              //满减去掉
+                  // $('.zuoqq .duoqian').html(satisfyAmount);
+                  // $('.zuoqq .jikuai').html(discountAmount);
+                  // $('.qq .ggg').html(discountAmount);
+                  // $('.zuoqq').hide();
+                  $('.ggg').hide();
+                  $('.hdyh').hide();
+                  // if($('.jine strong').html()>0){
+                  //   $('.hdyh').show();
+                  // }else{
+                  //   $('.hdyh').hide();                    
+                  // }
+
+                }
+              })
+            }
+            $('#right ul').eq(index).removeClass('hasdata').show().siblings().hide();
+            function creatList(data) {
+              // 生成右边的列表
+                var liHtml = '';
+                var liListHtml = '';
+                var leftNav = '';
+                var liObj = {};
+                $('#right ul').eq(index).find('li').each(function (){
+                  liObj[$(this).attr('data-title')] = '';
+                })
+                $.each(data, function (){
+                  liObj[this.secondType] += '<div class="shop" salePlanId="'+this.salePlanId+'" salePlanType="'+this.salePlanType+'">' +
+                      '<div class="item">' +
+                      '<div class="item-left">' +
+                      '<img src="'+this.productPic+'" alt="" class="item-img">' +
+                      '</div>' +
+                      '<div class="item-right">' +
+                      '<div class="title">' + this.ruleName + '</div>' +
+                      '<div class="subtitle">' +
+                      '<button class="decrace">-</button>' +
+                      '<input type="number" class="num" value=0 readonly="readonly">' +
+                      '<button class="add">+</button>' +
+                      '</div>' +
+                      '<div class="price">￥<span class="priceNum">' + this.price + '</span></div>' +
+                      '</div>' +
+                      '</div>' +
+                      '</div>'
+                })
+                $('#right ul').eq(index).find('li').each(function (){
+                  var dataTitle = $(this).attr('data-title');
+                  $(this).append('<div class="class-title">' + dataTitle + '</div>' + liObj[dataTitle]);
+                  var len = $(this).find('.shop').length;
+                  $(this).attr('data-height',len * 121 + 37)
+                })
+            }
+          },
+
+          getNav: function () {
+            var _this = this;
+            $.ajax({
+              url: 'https://www.e-shequ.com/guangming/wechat/hexie/wechat/collocation/getCategory/2/',
+              type: 'GET',
+              dataType: 'json',
+              success: function (data) {
+                var liHtml = '';
+                var ulLiHtml = '';
+                var ulhtml = '';
+                var dataLiHtml = '';
+                $.each(data.result, function () {
+                  if (this.firstType) {
+                    $.each(this.secondTypes, function () {
+                      ulLiHtml += '<li>' + this + '</li>';
+                      dataLiHtml += '<li data-title='+ this +'></li>';
+                    })
+                    liHtml += '<li class="firstType"><span>' + this.firstType + '</span><ul>' + ulLiHtml + '</ul></li>'
+                    ulhtml += '<ul class="hasdata">' + dataLiHtml + '</ul>';
+                    ulLiHtml = '';
+                    dataLiHtml = '';
+                  }
+                })
+                $('#left>ul').append(liHtml);
+                $('#left>ul>li').first().addClass('active');
+                $('#left>ul>li').first().addClass('left-lan');
+                $('#right').append(ulhtml);
+                _this.getlist($('.firstType').eq(0).find('span').html(),0);
+                _this.firstTypeClick()
+              }
+            })
+          },
+          firstTypeClick:function (){
+            var _this = this;
+            $('.firstType').click(function (){
+              var goods = $(this).find('span').html();
+              _this.getlist(goods,$(this).index());
+              $(this).addClass('active').siblings().removeClass('active')
+              $(this).addClass('left-lan').siblings().removeClass('left-lan')
+              _this.thisUlindex = $(this).index();
+            })
+            $('.firstType li').click(function (){
+              $(this).addClass('active').siblings().removeClass('active')
+              $(this).addClass('left-red').siblings().removeClass('left-red');
+              var ulIndex = $(this).parents('li').index();
+              var liIndex = $(this).index();
+              $(window).scrollTop(function (){
+                var itemLen = 0;
+                $('#right ul').eq(ulIndex).find('li').each(function (){
+                  if(liIndex == $(this).index()){
+                    return false;
+                  }else{
+                    itemLen += $(this).find('.shop').length;
+                  }
+                })
+                return liIndex * 37 + itemLen * 121 + 150;
+              })
+            })
+          },
+          shopcar:function (){
+            var _this = this;
+            $('#right').on('click','button.decrace',function (){
+              var count = parseInt($(this).next().val());
+              if(count > 0){
+                $(this).next().val(function (){
+                  return --count;
+                })
+              }
+              if(count < 1){
+                $(this).parents('.shop').removeClass('isAdd');
+              }
+              _this.calculate();
+            })
+            $('#right').on('click','button.add',function (){
+              var count = parseInt($(this).prev().val());
+              $(this).prev().val(function (){
+                return ++count;
+              })
+              $(this).parents('.shop').addClass('isAdd');
+              _this.calculate();
+            })
+          },
+          calculate:function (){
+            var allNum = 0;
+            var AllPrice = 0;
+            $('.isAdd').each(function (){
+              var thisNum = parseInt($(this).find('input').val());
+              var thisPrice = parseFloat($(this).find('.priceNum').html());
+              allNum += thisNum;
+              AllPrice += thisNum * thisPrice;
+            })
+            // if($('.duoqian').html()<=0 && $('.jikuai').html()<=0){
+            //   $('.zuoqq').hide()
+            // }else{
+            //   $('.zuoqq').show();
+            //   console.log(11111111);
+            //   $('.zuoqq .duoqian').html(satisfyAmount);
+            //   $('.zuoqq .jikuai').html(discountAmount);
+            // }
+            if(AllPrice>=satisfyAmount){
+              $('.ggg').show();
+            }else{
+              $('.ggg').hide();
+            }
+            $('.qq .fff').html((AllPrice-discountAmount).toFixed(2));
+            $('.qq .ggg').html(discountAmount);
+            $('.shopNum strong').html(allNum);
+            $('.shopPrice strong').html(AllPrice.toFixed(2));
+            $('.jine strong').html(discountAmount);//活动优惠金额
+            console.log(AllPrice);
+            console.log(satisfyAmount);
+            if(AllPrice>=satisfyAmount){
+              $('hdyh').hide();
+            }else{
+              $('.hdyh').show();              
+            }
+
+            $('.sjzf strong').html((AllPrice-discountAmount).toFixed(2))
+            $('.peisongfei strong').html(shipamount);
+            $('.yhje strong').html(freeshipAmount);
+          },
+          numChange:function (){
+            $('#right').on('change','input.num',function (){
+              var num = parseInt($(this).val());
+              if(num <= 0){
+                $(this).val(0);
+                $(this).parents('.shop').removeClass('isAdd');
+              }else{
+                $(this).val(num);
+                $(this).parents('.shop').removeClass('isAdd');
+              }
+            })
+            this.calculate();
+          }
+        }
+        obj.int();
+        $('.btn-buy').click(function(){
+          items = [];
+          $(".isAdd").each(function (){
+            // console.log($(this).find(".id").val());
+            items.push({
+              collocationId:2,
+              ruleId:parseInt($(this).attr('salePlanId')),
+              orderType:parseInt($(this).attr('salePlanType')),
+              count:parseInt($(this).find('.num').val())
+            })
+          })
+          // console.log(items);
+          $.ajax({
+            url: 'https://www.e-shequ.com/guangming/wechat/hexie/wechat/collocation/saveToCart',
+            type: 'post',
+            dataType:'json',
+            contentType:'application/json',
+            data:JSON.stringify({items:items}),
+            beforeSend:function (){
+              
+            },
+            success:function(){
+              console.log("ok");
+              var url = "https://www.e-shequ.com/pay/gm";
+              url += "multibuy.html?marketBuy=1";
+              url += "&basePageUrl=https://www.e-shequ.com/guangming/weixin/";
+              location.href = url;
+            }
+          })
+        })
+      </script>
+    </body>
+
+</html>
