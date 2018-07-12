@@ -89,7 +89,7 @@ avalon.ready(function() {
         currentStatus:'ALL',
         groupsNum: 1,
         //bg_img:'static/img/bg/bg_orders.jpg',
-		bg_img:'../guangming/static/img/bg/bg_orders.jpg'
+		bg_img:'../guangming/static/img/bg/bg_orders.jpg',
         dropdownCollapsed: true,
         selectedDropdown: '',
         dropdowns: [
