@@ -88,7 +88,8 @@ avalon.ready(function() {
         orders: [],
         currentStatus:'ALL',
         groupsNum: 1,
-        bg_img:'static/img/bg/bg_orders.jpg',
+        //bg_img:'static/img/bg/bg_orders.jpg',
+		bg_img:'../guangming/static/img/bg/bg_orders.jpg'
         dropdownCollapsed: true,
         selectedDropdown: '',
         dropdowns: [
@@ -152,7 +153,8 @@ avalon.ready(function() {
         	o.currentShow = page
         },
         gotoDetail:function(orderid){
-        	location.href="orderdetail.html?orderId="+orderid;
+        	//location.href="orderdetail.html?orderId="+orderid;
+			location.href = "../guangming/weixin/orderdetail.html?orderId="+orderid;
 	},
     checkLogisics: function(order){
     	var  logisticName = escape(order.logisticName);
