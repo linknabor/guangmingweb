@@ -140,6 +140,7 @@ avalon.ready(function() {
         },
         comment: function(order) {
             window.location.href="group/comment.html?orderId="+order.id;
+            // window.location.href="./group/comment.html"
         },
         orderConfirm: function(order) {
         	if(confirm("确定要已收货？")){
@@ -154,11 +155,14 @@ avalon.ready(function() {
         },
         gotoDetail:function(orderid){
         	//location.href="orderdetail.html?orderId="+orderid;
-			location.href = "../guangming/weixin/orderdetail.html?orderId="+orderid;
+            // location.href = "../guangming/weixin/orderdetail.html?orderId="+orderid;
+            location.href="./group/orderdetail.htmlorderId="+orderid;
+            
 	},
     checkLogisics: function(order){
     	var  logisticName = escape(order.logisticName);
-		location.href = "logistics.html?com=" + logisticName+"&nu="+order.logisticNo; 
+        location.href = "./logistics.html?com=" + logisticName+"&nu="+order.logisticNo; 
+        // location.href="./logistics.html"
     }
     });
     //initWechat(['chooseWXPay']) ;

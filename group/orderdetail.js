@@ -37,7 +37,8 @@ avalon.ready(function() {
         },
         r = function() {
         	alert("获取订单信息失败！");
-        	location.href="orders.html";
+            location.href="../orders.html";
+            // location.href="../orders.html"
         };
         common.invokeApi(n, a, i, null, e, r)
     }
@@ -54,7 +55,8 @@ avalon.ready(function() {
         },
         r = function() {
         	alert("获取订单信息失败！");
-        	location.href="../home/index.html";
+            location.href="../home/index.html";
+            // location.href="../home/ind"
         };
         common.invokeApi(n, a, i, null, e, r)
     }
@@ -130,7 +132,8 @@ avalon.ready(function() {
         totalCount:0,
         
     	gotoGroupDetail:function(order){
-    		window.location.href = "group/rgroupinvite.html?ruleId="+ order.groupRuleId + "&share=1";
+            window.location.href = "./rgroupinvite.html?ruleId="+ order.groupRuleId + "&share=1";
+            // window.location.href="./rgr"
     	},
         orderPay: function(order) {
 			pay(order);
@@ -141,7 +144,8 @@ avalon.ready(function() {
 			}
         },
         comment:function(order){
-        	window.location.href="group/comment.html?orderId="+order.id;
+            window.location.href="./comment.html?orderId="+order.id;
+            // window.location.href="./com"
         },
         orderConfirm:function(order){
         	if(confirm("确定要已收货？")){
@@ -150,7 +154,8 @@ avalon.ready(function() {
         },
 	    checkLogisics: function(order){
 	    	var  logisticName = escape(order.logisticName);
-			location.href = "logistics.html?com=" + logisticName+"&nu="+order.logisticNo; 
+            location.href = "../logistics.html?com=" + logisticName+"&nu="+order.logisticNo; 
+            // location.href="../logistics.html"
 	    },
         groupLeftTime:"已结束"
     });
