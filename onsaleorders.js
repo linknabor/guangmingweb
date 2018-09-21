@@ -155,8 +155,8 @@ avalon.ready(function() {
         },
         gotoDetail:function(orderid){
         	//location.href="orderdetail.html?orderId="+orderid;
-            // location.href = "../guangming/weixin/orderdetail.html?orderId="+orderid;
-            location.href="./group/orderdetail.htmlorderId="+orderid;
+            location.href = "../guangming/weixin/group/orderdetail.html?orderId="+orderid;
+            // location.href="./group/orderdetail.html?orderId="+orderid;
             
 	},
     checkLogisics: function(order){
