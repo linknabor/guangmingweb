@@ -161,7 +161,7 @@ avalon.ready(function() {
 	},
     checkLogisics: function(order){
     	var  logisticName = escape(order.logisticName);
-        location.href = "./logistics.html?com=" + logisticName+"&nu="+order.logisticNo; 
+        location.href = "logistics.html?com=" + logisticName+"&nu="+order.logisticNo; 
         // location.href="./logistics.html"
     }
     });
