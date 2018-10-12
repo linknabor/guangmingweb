@@ -66,6 +66,15 @@ avalon.ready(function() {
         a = "/requestPay/"+order.id,
         i = null,
         e = function(n) {
+            //传入 appid   微信初始化配置
+            wx.config({
+				appId: n.result.appId, // 必填，公众号的唯一标识
+				timestamp: n.result.timestamp , // 必填，生成签名的时间戳
+				nonceStr: n.result.nonceStr, // 必填，生成签名的随机串
+				signature: n.result.signature,// 必填，签名，见附录1
+				jsApiList: ['chooseWXPay'] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
+			}); 
+
         	wx.chooseWXPay({
               "timestamp":n.result.timestamp,
               "nonceStr":n.result.nonceStr,
@@ -160,7 +169,7 @@ avalon.ready(function() {
         groupLeftTime:"已结束"
     });
 
-    initWechat(['chooseWXPay']) ;
+    // initWechat(['chooseWXPay']) ;
     getOrderId();
     getOrder();
     avalon.scan(document.body);

@@ -39,7 +39,7 @@ avalon.ready(function() {
                   	o.orders[idx].status=1;
                   	o.orders[idx].statusStr='配货中';
                   	
-                  	//notifyPaySuccess();
+                  	// notifyPaySuccess();
         	    }
         	});
         },
