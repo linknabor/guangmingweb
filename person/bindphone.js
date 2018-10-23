@@ -107,7 +107,8 @@ avalon.ready(function() {
 	   
 	   
         getCaptcha: function() {
-        	var reg = /^0?1[3|4|5|8][0-9]\d{8}$/;
+			// var reg = /^0?1[3|4|5|8][0-9]\d{8}$/;
+			var reg=/^[1][3,4,5,7,8][0-9]{9}$/;
 	       	if (!reg.test(o.user.tel)) {
 	       	     alert("请输入正确的手机号");
 	       	     return;
